@@ -62,7 +62,7 @@ export const appSlice = createSlice({
         removeToken();
         removeRefreshToken();
       })
-      .addCase(doLogout.rejected, (_, action) => { });
+      .addCase(doLogout.rejected, (_, action) => {});
   }
 });
 
