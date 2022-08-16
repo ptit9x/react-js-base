@@ -7,6 +7,7 @@ import MainLayout from "./layouts/MainLayout/MainLayout";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home/Home"));
+const AccessWallet = lazy(() => import("./pages/AccessWallet/AccessWallet"));
 
 const RouterConfig = () => {
   const createRoutes = useRoutes([
@@ -17,6 +18,20 @@ const RouterConfig = () => {
           <Login />
         </PublicGuard>
       )
+    },
+    {
+      path: PATH.WALLET,
+      element: (
+        <PublicGuard>
+          <MainLayout />
+        </PublicGuard>
+      ),
+      children: [
+        {
+          path: PATH.ACCESS_WALLET,
+          element: <AccessWallet />
+        }
+      ]
     },
     {
       path: PATH.HOME,
