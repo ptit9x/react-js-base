@@ -1,9 +1,14 @@
 import { useTranslation } from "react-i18next";
-import "./Login.scss";
+import AccessWalletItem from "../AccessWalletItem/AccessWalletItem";
 
 const AccessWallet = () => {
   const { t } = useTranslation();
 
-  return <div className="login">{t("access-wallet-layout")}</div>;
+  return (
+    <div>
+      <AccessWalletItem />
+      <AccessWalletItem />
+    </div>
+  );
 };
 export default AccessWallet;

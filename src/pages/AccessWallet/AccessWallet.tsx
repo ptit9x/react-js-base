@@ -1,11 +1,11 @@
 import React from "react";
-import LoginComponent from "../../components/Login/Login";
+import AccessWalletComponent from "../../components/AccessWallet/AccessWallet";
 import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 
 const AccessWallet = () => {
   return (
     <AuthLayout>
-      <LoginComponent />
+      <AccessWalletComponent />
     </AuthLayout>
   );
 };

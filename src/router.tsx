@@ -4,6 +4,7 @@ import AuthenticatedGuard from "./guards/AuthenticatedGuard";
 import PublicGuard from "./guards/PublicGuard";
 import { PATH } from "./constants/paths";
 import MainLayout from "./layouts/MainLayout/MainLayout";
+import GuestLayout from "./layouts/GuestLayout/GuestLayout";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -21,11 +22,7 @@ const RouterConfig = () => {
     },
     {
       path: PATH.WALLET,
-      element: (
-        <PublicGuard>
-          <MainLayout />
-        </PublicGuard>
-      ),
+      element: <GuestLayout />,
       children: [
         {
           path: PATH.ACCESS_WALLET,
