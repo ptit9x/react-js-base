@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles"
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
@@ -77,25 +77,25 @@ const theme = createTheme({
     fontWeightMedium: 500,
     fontWeightBold: 700
   }
-})
+});
 
 declare module "@mui/material/styles/createPalette" {
   export interface Palette {
-    blueGrey: ColorPartial
-    blue: ColorPartial
-    gray: ColorPartial
-    white: ColorPartial
-    green: ColorPartial
-    red: ColorPartial
+    blueGrey: ColorPartial;
+    blue: ColorPartial;
+    gray: ColorPartial;
+    white: ColorPartial;
+    green: ColorPartial;
+    red: ColorPartial;
   }
   export interface PaletteOptions {
-    blueGrey: ColorPartial
-    blue: ColorPartial
-    gray: ColorPartial
-    white: ColorPartial
-    green: ColorPartial
-    red: ColorPartial
+    blueGrey: ColorPartial;
+    blue: ColorPartial;
+    gray: ColorPartial;
+    white: ColorPartial;
+    green: ColorPartial;
+    red: ColorPartial;
   }
 }
 
-export default theme
+export default theme;

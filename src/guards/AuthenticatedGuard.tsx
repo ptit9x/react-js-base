@@ -10,11 +10,11 @@ interface Props {
 const AuthenticatedGuard = ({ children }: Props) => {
   const location = useLocation();
 
-  return getToken() ? (
-    <>{children}</>
-  ) : (
-    <Navigate to={PATH.LOGIN} replace state={{ from: location }} />
-  );
+  // return getToken() ? (
+  //   <>{children}</>
+  // ) : (
+  //   <Navigate to={PATH.LOGIN} replace state={{ from: location }} />
+  // );
 };
 
 export default AuthenticatedGuard;
