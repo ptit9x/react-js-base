@@ -17,7 +17,6 @@ const App = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={<Loading />}>
-        <p>chao abc</p>
         <Routes />
       </Suspense>
     </BrowserRouter>
