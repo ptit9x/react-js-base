@@ -2,7 +2,6 @@ import { Button, Chip, Grid, Typography } from "@mui/material";
 import GppGoodIcon from "@mui/icons-material/GppGood";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const BREAK_POINT_LAYOUT = 960;
@@ -20,7 +19,6 @@ interface Props {
 }
 
 const AccessWalletItem = (props: Props) => {
-  const { t } = useTranslation();
   const [changeLayout, setChangeLayout] = useState(false);
   function handleChangeInnerSize() {
     if (window.innerWidth < BREAK_POINT_LAYOUT) {
@@ -37,11 +35,19 @@ const AccessWalletItem = (props: Props) => {
   }, []);
 
   return (
-    <Button variant="contained" color="success">
+    <Button
+      variant="contained"
+      style={{
+        textTransform: "none",
+        maxWidth: 500,
+        color: "#000",
+        backgroundColor: "#fff"
+      }}
+    >
       <Grid container spacing={4}>
         {!changeLayout ? (
           <Grid item>
-            <Img width="70" height="70" alt={props.title} src={props.srcIcon} />
+            <img width="70" height="70" alt={props.title} src={props.srcIcon} />
           </Grid>
         ) : null}
         <Grid item container sm>
@@ -57,7 +63,7 @@ const AccessWalletItem = (props: Props) => {
               </Grid>
             ) : null}
             <Grid item>
-              <Typography gutterBottom variant="subtitle1">
+              <Typography gutterBottom variant="h6" fontWeight={600}>
                 {props.title}
               </Typography>
             </Grid>
