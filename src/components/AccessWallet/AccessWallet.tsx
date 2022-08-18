@@ -2,6 +2,9 @@ import { Grid } from "@mui/material";
 import AccessWalletItem from "../AccessWalletItem/AccessWalletItem";
 import { AccessWalletItemProps } from "../AccessWalletItem/AccessWalletItem";
 import Web3 from "web3";
+import { store } from "../../store";
+import { appSlice } from "../../App/App.reducer";
+import Wallet from "../../common/Wallet";
 
 const AccessWallet = () => {
   async function openWeb3Wallet() {
@@ -10,6 +13,7 @@ const AccessWallet = () => {
       try {
         await window.ethereum.enable();
         const acc = await web3.eth.getAccounts();
+        store.dispatch(appSlice.actions.setWallet(new Wallet(acc[0])));
         // const wallet = new Web3Wallet(acc[0]);
         // this.setWallet([wallet, window.ethereum]);
         // this.trackAccessWallet(WALLET_TYPES.WEB3_WALLET);
@@ -43,21 +47,24 @@ const AccessWallet = () => {
     }
   ];
   return (
-    <Grid container spacing={2} direction="column">
-      {buttons.map(btnContext => {
-        return (
-          <Grid item xs={8}>
-            <AccessWalletItem
-              srcIcon={btnContext.srcIcon}
-              title={btnContext.title}
-              description={btnContext.description}
-              isOfficial={btnContext.isOfficial}
-              onClick={btnContext.onClick}
-            />
-          </Grid>
-        );
-      })}
-    </Grid>
+    <div>
+      <h1>{store.getState().app.wallet.getAddress()}</h1>
+      <Grid container spacing={2} direction="column">
+        {buttons.map(btnContext => {
+          return (
+            <Grid item xs={8}>
+              <AccessWalletItem
+                srcIcon={btnContext.srcIcon}
+                title={btnContext.title}
+                description={btnContext.description}
+                isOfficial={btnContext.isOfficial}
+                onClick={btnContext.onClick}
+              />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </div>
   );
 };
 export default AccessWallet;
