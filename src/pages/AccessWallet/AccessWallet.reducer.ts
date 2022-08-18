@@ -15,7 +15,7 @@ export const loginSlice = createSlice({
     changeInput(state) {
       state.isAccessSuccess = true;
     }
-  },
+  }
 });
 
 export const { changeInput } = loginSlice.actions;

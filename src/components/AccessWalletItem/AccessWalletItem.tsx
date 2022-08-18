@@ -11,14 +11,15 @@ const Img = styled.img`
   maxWidth: "100%",
   maxHeight: "100%"
 `;
-interface Props {
+export interface AccessWalletItemProps {
   srcIcon: string;
   title: string;
   description: string;
   isOfficial: boolean;
+  onClick: () => void;
 }
 
-const AccessWalletItem = (props: Props) => {
+const AccessWalletItem = (props: AccessWalletItemProps) => {
   const [changeLayout, setChangeLayout] = useState(false);
   function handleChangeInnerSize() {
     if (window.innerWidth < BREAK_POINT_LAYOUT) {
@@ -43,6 +44,7 @@ const AccessWalletItem = (props: Props) => {
         color: "#000",
         backgroundColor: "#fff"
       }}
+      onClick={props.onClick}
     >
       <Grid container spacing={4}>
         {!changeLayout ? (
