@@ -1,25 +1,30 @@
-import React, { useEffect, Suspense } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { useAppDispatch } from "src/store";
+import { useTranslation } from "react-i18next";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+
 import Loading from "../components/Loading/Loading";
+import { useGlobalContext } from "../context/GlobalContext";
 import Routes from "../router";
-import { doGetProfile } from "./App.thunks";
+import theme from "../theme";
 
 const App = () => {
-  const dispatch = useAppDispatch();
-  const { isLoginSuccess } = useSelector((state: AppState) => state.auth);
+  const { i18n } = useTranslation();
+  const { language } = useGlobalContext();
 
   useEffect(() => {
-    dispatch(doGetProfile());
-  }, [dispatch, isLoginSuccess]);
+    i18n.changeLanguage(language);
+  }, [language, i18n]);
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Loading />}>
-        <Routes />
-      </Suspense>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Suspense fallback={<Loading />}>
+          <Routes />
+        </Suspense>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };
 

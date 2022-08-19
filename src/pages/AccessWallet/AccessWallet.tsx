@@ -1,4 +1,3 @@
-import React from "react";
 import AccessWalletComponent from "../../components/AccessWallet/AccessWallet";
 import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 
