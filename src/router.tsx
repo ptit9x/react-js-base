@@ -22,28 +22,16 @@ const InteractContract = lazy(
 const RouterConfig = () => {
   const createRoutes = useRoutes([
     {
-      path: PATH.ACCESS_WALLET,
-      element: (
-        // <PublicGuard>
-        <AccessWallet />
-        // </PublicGuard>
-      )
-    },
-    {
-      path: PATH.CREATE_WALLET,
-      element: (
-        // <PublicGuard>
-        <CreateWallet />
-        // </PublicGuard>
-      )
-    },
-    {
       path: PATH.WALLET,
       element: <GuestLayout />,
       children: [
         {
           path: PATH.ACCESS_WALLET,
           element: <AccessWallet />
+        },
+        {
+          path: PATH.ACCESS_WALLET,
+          element: <CreateWallet />
         }
       ]
     },

@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.0",
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
+    "@mui/styled-engine-sc": "^5.10.1",
     "@reduxjs/toolkit": "^1.8.4",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^16.11.48",
@@ -25,8 +25,7 @@
     "sass": "^1.54.4",
     "styled-components": "^5.3.5",
     "typescript": "^4.7.4",
-    "web-vitals": "^2.1.4",
-    "web3": "^1.7.5"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -61,5 +60,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1"
+  },
+  "resolutions": {
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   }
 }
