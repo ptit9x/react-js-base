@@ -47,22 +47,21 @@ const AccessWallet = () => {
       onClick: openWeb3Wallet
     }
   ];
+
   return (
     <div>
       <Grid container spacing={2} direction="column">
-        {buttons.map(btnContext => {
-          return (
-            <Grid item xs={8}>
-              <AccessWalletItem
-                srcIcon={btnContext.srcIcon}
-                title={btnContext.title}
-                description={btnContext.description}
-                isOfficial={btnContext.isOfficial}
-                onClick={btnContext.onClick}
-              />
-            </Grid>
-          );
-        })}
+        {buttons.map((btnContext, index) => (
+          <Grid item xs={8} key={index}>
+            <AccessWalletItem
+              srcIcon={btnContext.srcIcon}
+              title={btnContext.title}
+              description={btnContext.description}
+              isOfficial={btnContext.isOfficial}
+              onClick={btnContext.onClick}
+            />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
