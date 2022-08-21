@@ -1,9 +1,9 @@
-import { useEffect, Suspense } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@emotion/react";
+import { CssBaseline, ThemeProvider as MuiThemeProvider } from "@mui/material";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 
-import Loading from "../components/Loading/Loading";
 import { useGlobalContext } from "../context/GlobalContext";
 import Routes from "../router";
 import theme from "../theme";
@@ -17,14 +17,14 @@ const App = () => {
   }, [language, i18n]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Suspense fallback={<Loading />}>
+    <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
           <Routes />
-        </Suspense>
-      </BrowserRouter>
-    </ThemeProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </MuiThemeProvider>
   );
 };
 

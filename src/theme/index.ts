@@ -7,7 +7,7 @@ const theme = createTheme({
       black: "#000"
     },
     primary: {
-      light: "#ebfaf8",
+      light: "#a9f5eb",
       main: "#05c0a5"
     },
     secondary: {
@@ -64,8 +64,8 @@ const theme = createTheme({
       disabled: "rgba(0, 0, 0, 0.38)"
     },
     background: {
-      default: "#ccc",
-      paper: "#fff"
+      default: "#fff",
+      paper: "#f2f3f6"
     }
   },
   typography: {
@@ -96,6 +96,13 @@ declare module "@mui/material/styles/createPalette" {
     green: ColorPartial;
     red: ColorPartial;
   }
+}
+
+export type CustomizedTheme = typeof theme;
+
+declare module "@emotion/react" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  export interface Theme extends CustomizedTheme {}
 }
 
 export default theme;
