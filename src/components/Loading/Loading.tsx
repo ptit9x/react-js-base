@@ -1,5 +1,5 @@
 import SPIN from "../../assets/images/Spin.gif";
-import "./Loading.scss";
+import "./Loading.css";
 
 export default function Loading() {
   return (
