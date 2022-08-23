@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import Paper from "@mui/material/Paper";
 
 export const ItemBlock = styled(Paper)`
-backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+/* background-color: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', */
 ...theme.typography.body2,
 padding: theme.spacing(3),
 textAlign: "center",
@@ -20,7 +20,6 @@ export const Container = styled(Box)`
 `;
 
 export const Content = styled(Box)`
-backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
   max-width: 1185px;
   width: 100%;
   margin: auto;
