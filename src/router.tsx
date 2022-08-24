@@ -4,7 +4,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { PATH } from "./constants/paths";
 // import PublicGuard from "./guards/PublicGuard";
 import MainLayout from "./layouts/MainLayout/MainLayout";
-import GuestLayout from "./layouts/GuestLayout/GuestLayout";
+const GuestLayout = lazy(() => import("./layouts/GuestLayout/GuestLayout"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const AccessWallet = lazy(() => import("./pages/AccessWallet/AccessWallet"));
 const CreateWallet = lazy(() => import("./pages/CreateWallet/CreateWallet"));
@@ -86,15 +86,3 @@ const RouterConfig = () => {
 };
 
 export default RouterConfig;
-
-// import AuthenticatedGuard from "./guards/AuthenticatedGuard"
-// import PublicGuard from "./guards/PublicGuard"
-// import AccessWallet from "./pages/AccessWallet/AccessWallet"
-// import CreateWallet from "./pages/CreateWallet/CreateWallet"
-// import DApps from "./pages/DApps/DApps"
-// import DeployContract from "./pages/DeployContract/DeployContract"
-// import InteractContract from "./pages/InteractContract/InteractContract"
-// import NFT from "./pages/NFT/NFT"
-// import SendToken from "./pages/SendToken/SendToken"
-// import SwapToken from "./pages/SwapToken/SwapToken"
-// const Login = lazy(() => import("./pages/Login/Login"))
