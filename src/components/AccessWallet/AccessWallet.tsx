@@ -1,11 +1,10 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography, Link } from "@mui/material";
 import AccessWalletItem from "../AccessWalletItem/AccessWalletItem";
 import { AccessWalletItemProps } from "../AccessWalletItem/AccessWalletItem";
 // import Web3 from "web3";
 import { store } from "../../store";
 import { appSlice } from "../../App/App.reducer";
 import Wallet from "../../common/Wallet";
-
 const AccessWallet = () => {
   async function openWeb3Wallet() {
     console.log("click");
@@ -50,9 +49,29 @@ const AccessWallet = () => {
 
   return (
     <div>
-      <Grid container spacing={2} direction="column">
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        justifyContent="center"
+        align-items="center"
+      >
+        <Grid item xs={12}>
+          <Typography variant="h3" gutterBottom align="center" fontWeight={600}>
+            Access My Wallet
+          </Typography>
+          <Typography variant="body1" align="center">
+            Please select a method to access your wallet.
+          </Typography>
+          <Typography variant="body1" gutterBottom align="center">
+            Don't have a wallet?{" "}
+            {/* <Link href="#">
+              Create Wallet
+            </Link> */}
+          </Typography>
+        </Grid>
         {buttons.map((btnContext, index) => (
-          <Grid item xs={8} key={index}>
+          <Grid item xs={10} key={index}>
             <AccessWalletItem
               srcIcon={btnContext.srcIcon}
               title={btnContext.title}

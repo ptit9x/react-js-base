@@ -2,15 +2,9 @@ import { Button, Chip, Grid, Typography } from "@mui/material";
 import GppGoodIcon from "@mui/icons-material/GppGood";
 import { useEffect } from "react";
 import { useState } from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const BREAK_POINT_LAYOUT = 960;
-const Img = styled.img`
-  margin: "auto",
-  display: "block",
-  maxWidth: "100%",
-  maxHeight: "100%"
-`;
 export interface AccessWalletItemProps {
   srcIcon: string;
   title: string;
@@ -18,6 +12,15 @@ export interface AccessWalletItemProps {
   isOfficial: boolean;
   onClick: () => void;
 }
+
+const ImgStyled = styled.img`
+  margin-right: 24px;
+  color: ${props => props.color};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  alt: ${props => props.alt};
+  src: ${props => props.src};
+`;
 
 const AccessWalletItem = (props: AccessWalletItemProps) => {
   const [changeLayout, setChangeLayout] = useState(false);
@@ -38,25 +41,32 @@ const AccessWalletItem = (props: AccessWalletItemProps) => {
   return (
     <Button
       variant="contained"
-      style={{
+      sx={{
         textTransform: "none",
-        maxWidth: 500,
+        maxWidth: "100%",
+        m: "16px",
         color: "#000",
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        p: "40px 20px 40px 40px"
       }}
       onClick={props.onClick}
     >
-      <Grid container spacing={4}>
+      <Grid container>
         {!changeLayout ? (
           <Grid item>
-            <img width="70" height="70" alt={props.title} src={props.srcIcon} />
+            <ImgStyled
+              width="70"
+              height="70"
+              alt={props.title}
+              src={props.srcIcon}
+            />
           </Grid>
         ) : null}
         <Grid item container sm>
-          <Grid item container alignItems="center" spacing={2}>
+          <Grid item container alignItems="center">
             {changeLayout ? (
               <Grid item>
-                <Img
+                <ImgStyled
                   width="50"
                   height="50"
                   alt={props.title}
@@ -65,7 +75,7 @@ const AccessWalletItem = (props: AccessWalletItemProps) => {
               </Grid>
             ) : null}
             <Grid item>
-              <Typography gutterBottom variant="h6" fontWeight={600}>
+              <Typography gutterBottom variant="h6" fontWeight={700}>
                 {props.title}
               </Typography>
             </Grid>

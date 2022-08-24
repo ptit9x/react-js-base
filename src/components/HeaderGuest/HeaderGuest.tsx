@@ -14,8 +14,8 @@ import {
 import React from "react";
 import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
+import styled from "@emotion/styled";
 
-import styled from "styled-components";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const AppBarStyled = styled(AppBar)`
