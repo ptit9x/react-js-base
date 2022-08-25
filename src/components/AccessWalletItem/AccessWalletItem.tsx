@@ -43,7 +43,7 @@ const AccessWalletItem = (props: AccessWalletItemProps) => {
       variant="contained"
       sx={{
         textTransform: "none",
-        maxWidth: "100%",
+        maxWidth: "600px",
         m: "16px",
         color: "#000",
         backgroundColor: "#fff",

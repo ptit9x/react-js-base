@@ -6,7 +6,7 @@ import { store } from "../../store";
 import { appSlice } from "../../App/App.reducer";
 import Wallet from "../../common/Wallet";
 import { PATH } from "../../constants/paths";
-const AccessWallet = () => {
+const CreateWallet = () => {
   async function openWeb3Wallet() {
     console.log("click");
     // if (window.ethereum) {
@@ -34,15 +34,17 @@ const AccessWallet = () => {
     {
       srcIcon:
         "https://www.myetherwallet.com/img/icon-enkrypt-block.cb05ee30.svg",
-      title: "Enkrypt",
-      description: "Connect with Enkrypt browser extension",
+      title: "Install Enkrypt browser extension",
+      description:
+        "MEW’s official browser extension. Connect to web3 on Ethereum and Polkadot, manage your NFTs, buy, send and swap",
       isOfficial: true,
       onClick: openWeb3Wallet
     },
     {
       srcIcon: "https://www.myetherwallet.com/img/icon-extensions.fbf7b80e.png",
-      title: "Browser extension",
-      description: "Use your Web3 wallet with MEW",
+      title: "Download MEW wallet app",
+      description:
+        "Our official mobile app to create your wallet, and connect to MEW Web using your mobile phone",
       isOfficial: true,
       onClick: openWeb3Wallet
     }
@@ -58,19 +60,19 @@ const AccessWallet = () => {
       >
         <Grid item xs={12}>
           <Typography variant="h3" gutterBottom align="center" fontWeight={600}>
-            Access My Wallet
+            Create a new wallet
           </Typography>
           <Typography variant="body1" align="center">
-            Please select a method to access your wallet.
+            Please select a method to create a new wallet
           </Typography>
           <Typography variant="body1" gutterBottom align="center">
-            Don't have a wallet?{" "}
+            Already have a wallet?{" "}
             <Link
               style={{ color: "#fff" }}
-              href={PATH.CREATE_WALLET}
+              href={PATH.ACCESS_WALLET}
               underline="always"
             >
-              Create Wallet
+              Access Wallet
             </Link>
           </Typography>
         </Grid>
@@ -89,4 +91,4 @@ const AccessWallet = () => {
     </div>
   );
 };
-export default AccessWallet;
+export default CreateWallet;

@@ -30,7 +30,7 @@ const RouterConfig = () => {
           element: <AccessWallet />
         },
         {
-          path: PATH.ACCESS_WALLET,
+          path: PATH.CREATE_WALLET,
           element: <CreateWallet />
         }
       ]
