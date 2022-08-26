@@ -1,18 +1,12 @@
 import React from "react";
-
+import { BottomNavigation } from "@mui/material";
 const Footer = () => {
   return (
-    <div
-      style={{
-        justifySelf: "flex-end",
-        alignSelf: "end",
-        width: "100%",
-        backgroundColor: "#fff",
-        minHeight: "80px"
-      }}
+    <BottomNavigation
+      sx={{ position: "fixed", bottom: "0px", minHeight: "80px" }}
     >
       Footer
-    </div>
+    </BottomNavigation>
   );
 };
 

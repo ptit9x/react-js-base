@@ -1,12 +1,17 @@
+import { Typography } from "@mui/material";
 import React from "react";
+import { ButtonCusTom } from "../common/DashBoard.styled";
+import { Container } from "./Navbar.styled";
 
 const Navbar = () => {
   return (
-    <div
-      style={{ width: "100%", backgroundColor: "#bfbfbf", minHeight: "80px" }}
-    >
-      Navbar
-    </div>
+    <Container>
+      <Typography>
+        You can now Buy crypto with low fees Enjoy 0.7% fee when you select
+        <Typography> Bank account’ as payment method</Typography>
+      </Typography>
+      <ButtonCusTom>Buy Crypto Now</ButtonCusTom>
+    </Container>
   );
 };
 
