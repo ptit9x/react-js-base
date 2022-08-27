@@ -2,10 +2,6 @@ import AccessWalletComponent from "../../components/AccessWallet/AccessWallet";
 import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 
 const AccessWallet = () => {
-  return (
-    <AuthLayout>
-      <AccessWalletComponent />
-    </AuthLayout>
-  );
+  return <AccessWalletComponent />;
 };
 export default AccessWallet;
