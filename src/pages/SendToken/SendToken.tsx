@@ -1,7 +1,6 @@
-import React from "react"
-import SendTokenComponent from "../../components/SendToken/SendToken"
+import React from "react";
 
 const SendToken = () => {
-  return <SendTokenComponent />
-}
-export default SendToken
+  return <h1>SendToken</h1>;
+};
+export default SendToken;
