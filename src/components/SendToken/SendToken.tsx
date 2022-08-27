@@ -9,7 +9,7 @@ const SendToken = () => {
       <h2>Send</h2>
       <Box>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <div>
               <Typography variant="body2" fontWeight="bold">
                 <ErrorOutlineIcon></ErrorOutlineIcon>Your ETH balance is too low
@@ -22,7 +22,7 @@ const SendToken = () => {
               </Typography>
             </div>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <div>
               <Typography variant="body2" color="secondary">
                 Transfer ETH from another account
