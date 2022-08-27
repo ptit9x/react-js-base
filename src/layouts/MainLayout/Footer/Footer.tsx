@@ -8,7 +8,7 @@ const Footer = () => {
         alignSelf: "end",
         width: "100%",
         backgroundColor: "#fff",
-        minHeight: "80px"
+        minHeight: "68px"
       }}
     >
       Footer

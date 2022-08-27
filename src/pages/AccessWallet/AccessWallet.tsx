@@ -1,7 +1,6 @@
-import React from "react"
-import AccessWalletComponent from "../../components/AccessWallet/AccessWallet"
+import React from "react";
 
 const AccessWallet = () => {
-  return <AccessWalletComponent type="AccessWallet Component" />
-}
-export default AccessWallet
+  return <h1>AccessWallet</h1>;
+};
+export default AccessWallet;

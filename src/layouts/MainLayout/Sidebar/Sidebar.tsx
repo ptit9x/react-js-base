@@ -1,92 +1,39 @@
+import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 import { useLayoutEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import icon_contract from "src/assets/icons/icon-contract.svg";
-import icon_dapp from "src/assets/icons/icon-dapp.svg";
-import icon_dashboard from "src/assets/icons/icon-dashboard.svg";
-import icon_logout from "src/assets/icons/icon-logout.svg";
-import icon_menu_send from "src/assets/icons/icon-menu-send.svg";
-import icon_menu_swap from "src/assets/icons/icon-menu-swap.svg";
-import icon_nft from "src/assets/icons/icon-nft.svg";
-import icon_setting from "src/assets/icons/icon-setting.svg";
+import icon_logo from "src/assets/icons/logo-mew.svg";
 import { BREAKPOINT } from "src/constants/styles";
+import { usePrevious } from "src/hooks/usePrevious";
 import { useWindowSize } from "src/hooks/useWindowSize";
+import { useAppDispatch, useAppSelector } from "src/store";
+import theme from "src/theme";
 
-import MenuItem from "./MenuItem/MenuItem";
-import { Drawer, List } from "./Sidebar.styled";
+import { onCloseSidebar } from "../MainLayout.reducer";
+import AccountCard from "./AccountCard/AccountCard";
+import ActionButtons from "./ActionButtons/ActionButtons";
+import Menu from "./Menu/Menu";
+import { AccountInfo, Drawer, List, LogoWrapper } from "./Sidebar.styled";
 
-interface SidebarProps {
-  sidebarOpen: boolean;
-  handleOpenSidebar(value: boolean): void;
+enum Variant {
+  Temporary = "temporary",
+  Permanent = "permanent"
 }
 
-const Sidebar = ({ sidebarOpen, handleOpenSidebar }: SidebarProps) => {
-  const { t } = useTranslation();
+const Sidebar = () => {
+  const dispatch = useAppDispatch();
   const [currentWidth] = useWindowSize();
-  const [drawerVariant, setDrawerVariant] = useState<"temporary" | "permanent">(
-    "temporary"
-  );
-
-  const menuItems = [
-    {
-      name: t("Dashboard"),
-      link: "/wallet/dashboard",
-      icon: icon_dashboard
-    },
-    {
-      name: t("NFT Manager"),
-      link: "/wallet/nft",
-      icon: icon_nft
-    },
-    {
-      name: t("DApps"),
-      link: "/wallet/dapps",
-      icon: icon_dapp
-    },
-    {
-      name: t("Contract"),
-      icon: icon_contract,
-      items: [
-        {
-          name: t("Deploy Contract"),
-          link: "/wallet/deploy"
-        },
-        {
-          name: t("Interact Contract"),
-          link: "/wallet/interact"
-        }
-      ]
-    },
-    {
-      name: t("Settings"),
-      link: "/wallet/settings",
-      icon: icon_setting
-    },
-    {
-      name: t("Logout"),
-      link: "",
-      icon: icon_logout
-    },
-    {
-      name: t("Send Token"),
-      link: "/wallet/send-tx",
-      icon: icon_menu_send
-    },
-    {
-      name: t("Swap Token"),
-      link: "/wallet/swap",
-      icon: icon_menu_swap
-    }
-  ];
+  const isOpenSidebar = useAppSelector(state => state.mainLayout.isOpenSidebar);
+  const [drawerVariant, setDrawerVariant] = useState(Variant.Temporary);
+  const oldVariant = usePrevious(drawerVariant);
 
   useLayoutEffect(() => {
-    if (sidebarOpen && currentWidth <= BREAKPOINT.XL) {
-      setDrawerVariant("temporary");
-      handleOpenSidebar(false);
-    } else if (currentWidth > BREAKPOINT.XL) {
-      setDrawerVariant("permanent");
-      if (!sidebarOpen) {
-        handleOpenSidebar(true);
+    if (currentWidth <= BREAKPOINT.XL) {
+      setDrawerVariant(Variant.Temporary);
+      if (oldVariant === Variant.Permanent) {
+        dispatch(onCloseSidebar());
       }
+    } else {
+      setDrawerVariant(Variant.Permanent);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentWidth]);
@@ -95,17 +42,25 @@ const Sidebar = ({ sidebarOpen, handleOpenSidebar }: SidebarProps) => {
     <Drawer
       anchor={"left"}
       variant={drawerVariant}
-      open={sidebarOpen}
-      onClose={() => handleOpenSidebar(false)}
+      open={isOpenSidebar}
+      onClose={() => dispatch(onCloseSidebar())}
     >
+      <AccountInfo>
+        <LogoWrapper>
+          <img src={icon_logo} alt="sidebar-logo" width="120px" />
+          {drawerVariant === Variant.Temporary && (
+            <IconButton onClick={() => dispatch(onCloseSidebar())}>
+              <CloseIcon htmlColor={theme.palette.common.white} />
+            </IconButton>
+          )}
+        </LogoWrapper>
+
+        <AccountCard />
+      </AccountInfo>
+
       <List disablePadding>
-        {menuItems.map((item, index) => (
-          <MenuItem
-            {...item}
-            handleOpenSidebar={handleOpenSidebar}
-            key={index}
-          />
-        ))}
+        <ActionButtons />
+        <Menu />
       </List>
     </Drawer>
   );
