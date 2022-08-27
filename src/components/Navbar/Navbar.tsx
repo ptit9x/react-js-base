@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import { ButtonCusTom } from "../common/DashBoard.styled";
+import { ButtonCusTom } from "src/assets/common.styled";
 import { Container } from "./Navbar.styled";
 
 const Navbar = () => {

@@ -1,12 +1,11 @@
 import React from "react";
-import { TableCellCus } from "./DashBoard.styled";
+import { TableCellCus } from "./Table.styled";
 
 interface ItemTableProps {
   column: any;
   value: any;
 }
-function ItemTable(props: ItemTableProps) {
-  const { column, value } = props;
+function ItemTable({ column, value }: ItemTableProps) {
   return (
     <TableCellCus key={column.id} align={column.align}>
       {column.format && typeof value === "number"

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
-import { DashBoardStyle } from "./DashBoard.styled";
+import { DashBoardStyle } from "./ContentLayout.styled";
 interface DashBoardLayoutProps {
   main?: ReactNode;
   sideRight?: ReactNode;
@@ -10,7 +10,7 @@ interface DashBoardLayoutProps {
 const DashBoardLayout = ({
   main,
   sideRight,
-  disableSide
+  disableSide,
 }: DashBoardLayoutProps) => {
   return (
     <DashBoardStyle>
