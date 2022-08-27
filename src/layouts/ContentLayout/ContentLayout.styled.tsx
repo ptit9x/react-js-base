@@ -1,6 +1,6 @@
 import { Box, styled } from "@mui/material";
 
-export const DashBoardStyle = styled(Box)`
+export const ContentLayoutStyle = styled(Box)`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;

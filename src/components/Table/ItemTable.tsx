@@ -1,5 +1,5 @@
 import React from "react";
-import { TableCellCus } from "./Table.styled";
+import { TableCellCus } from "./StickyTable.styled";
 
 interface ItemTableProps {
   column: any;

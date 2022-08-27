@@ -7,7 +7,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import ItemTable from "./ItemTable";
-import { TableHeadCus } from "./Table.styled";
+import { TableHeadCus } from "./StickyTable.styled";
 
 interface Column {
   id: "name" | "code" | "population" | "size" | "density";
@@ -25,22 +25,22 @@ const columns: readonly Column[] = [
     label: "Population",
     minWidth: 170,
     align: "right",
-    format: (value: number) => value.toLocaleString("en-US")
+    format: (value: number) => value.toLocaleString("en-US"),
   },
   {
     id: "size",
     label: "Size\u00a0(km\u00b2)",
     minWidth: 170,
     align: "right",
-    format: (value: number) => value.toLocaleString("en-US")
+    format: (value: number) => value.toLocaleString("en-US"),
   },
   {
     id: "density",
     label: "Density",
     minWidth: 170,
     align: "right",
-    format: (value: number) => value.toFixed(2)
-  }
+    format: (value: number) => value.toFixed(2),
+  },
 ];
 
 interface Data {
@@ -65,7 +65,7 @@ const rows = [
   createData("India", "IN", 1324171354, 3287263),
   createData("China", "CN", 1403500365, 9596961),
   createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520)
+  createData("United States", "US", 327167434, 9833520),
 ];
 
 export default function StickyHeadTable() {
@@ -89,7 +89,7 @@ export default function StickyHeadTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHeadCus>
             <TableRow>
-              {columns.map(column => (
+              {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -103,7 +103,7 @@ export default function StickyHeadTable() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(row => {
+              .map((row) => {
                 return (
                   <TableRow
                     sx={{ borderRadius: "1rem" }}
@@ -112,7 +112,7 @@ export default function StickyHeadTable() {
                     tabIndex={-1}
                     key={row.code}
                   >
-                    {columns.map(column => {
+                    {columns.map((column) => {
                       const value = row[column.id];
                       return (
                         <ItemTable value={value} column={column}></ItemTable>

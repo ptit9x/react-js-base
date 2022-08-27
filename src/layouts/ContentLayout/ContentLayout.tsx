@@ -1,24 +1,24 @@
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
-import { DashBoardStyle } from "./ContentLayout.styled";
-interface DashBoardLayoutProps {
+import { ContentLayoutStyle } from "./ContentLayout.styled";
+interface ContentLayoutProps {
   main?: ReactNode;
   sideRight?: ReactNode;
   disableSide?: boolean;
 }
 
-const DashBoardLayout = ({
+const ContentLayout = ({
   main,
   sideRight,
   disableSide,
-}: DashBoardLayoutProps) => {
+}: ContentLayoutProps) => {
   return (
-    <DashBoardStyle>
+    <ContentLayoutStyle>
       <Box sx={{ gridArea: "main" }}>{main}</Box>
       <Box sx={{ gridArea: "network", bgcolor: "secondary.main" }}>NetWork</Box>
       {!disableSide && <Box sx={{ gridArea: "sidebar" }}>{sideRight}</Box>}
-    </DashBoardStyle>
+    </ContentLayoutStyle>
   );
 };
 
-export default DashBoardLayout;
+export default ContentLayout;

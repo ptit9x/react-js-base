@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Box, Typography } from "@mui/material";
 import { ItemPaper, ButtonCusTom } from "src/assets/common.styled";
-import StickyHeadTable from "../Table/StickyHeadTable";
+import StickyHeadTable from "../Table/StickyTable";
 import { Table } from "./DashBoard.styled";
 
 interface DasboardProps {
