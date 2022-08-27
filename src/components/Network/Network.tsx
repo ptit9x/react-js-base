@@ -15,7 +15,7 @@ const Network = () => {
                 <img
                     src="	https://www.myetherwallet.com/img/eth.5b2fc1fc.svg"
                     alt="eth-icon"
-                    style={{ width: "60px", margin: "0 auto" }}
+                    style={{ width: "60px", margin: "0 0 0 auto" }}
                 ></img>
             </Stack>
         </Box>
