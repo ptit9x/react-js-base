@@ -15,7 +15,7 @@ const Dashboard = ({ loading }: DasboardProps) => {
     <>
       <ItemPaper elevation={2} square>
         <h2>{t("My ETH balance is empty")}</h2>
-        <ButtonCusTom padd={0.7}>{t("Buy Crypto Now")}</ButtonCusTom>
+        <ButtonCusTom>{t("Buy Crypto Now")}</ButtonCusTom>
         <div>{t("We accept Credit card Visa")}</div>
         <span className="text-alight">
           {t("Tip: You can also send your ETH from another wallet!")}

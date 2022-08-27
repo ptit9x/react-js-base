@@ -20,7 +20,7 @@ export const ItemPaper = styled(Paper)`
 export const ButtonCusTom = styled(Button)`
   border-radius: 0.7rem;
   color: ${({ theme }) => theme.palette.common.white};
-  padding: ${({ padd }: ButtonProps) => padd + "rem"};
+  padding: ${({ padd = 0.7 }: ButtonProps) => padd + "rem"};
   background-color: ${({ theme }) => theme.palette.primary.main};
   :hover {
     background-color: ${({ theme }) => theme.palette.primary.main};
