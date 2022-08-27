@@ -1,32 +1,16 @@
-import { Box, Button, Container } from "@mui/material";
-import { useState } from "react";
+import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import Footer from "src/components/Footer/Footer";
-import Navbar from "src/components/Navbar/Navbar";
-import { BREAKPOINT } from "src/constants/styles";
-import { useWindowSize } from "src/hooks/useWindowSize";
-import { Content } from "./MainLayout.styled";
+import Footer from "./Footer/Footer";
+import Navbar from "./Navbar/Navbar";
+
+import { Container, Content } from "./MainLayout.styled";
 import Sidebar from "./Sidebar/Sidebar";
 
 const MainLayout = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentWidth] = useWindowSize();
-  function handleOpenSidebar(value: boolean) {
-    setSidebarOpen(value);
-  }
-
   return (
     <Box display="flex">
-      <Sidebar
-        sidebarOpen={sidebarOpen}
-        handleOpenSidebar={handleOpenSidebar}
-      />
+      <Sidebar />
       <Container>
-        {currentWidth <= BREAKPOINT.XL && (
-          <Button onClick={() => setSidebarOpen(!sidebarOpen)}>
-            Open Sidebar
-          </Button>
-        )}
         <Navbar />
         <Content>
           <Outlet />

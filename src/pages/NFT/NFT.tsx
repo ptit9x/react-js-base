@@ -1,7 +1,6 @@
 import React from "react";
-import NFTComponent from "../../components/NFT/NFT";
 
 const NFT = () => {
-  return <NFTComponent />;
+  return <h1>NFTComponent</h1>;
 };
 export default NFT;

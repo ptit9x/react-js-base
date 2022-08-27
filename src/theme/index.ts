@@ -23,7 +23,8 @@ const theme = createTheme({
       600: "#f5f5f6"
     },
     blue: {
-      100: "#07385f"
+      100: "#07385f",
+      500: "#0b1a40"
     },
     blueGrey: {
       100: "#f2fafa",

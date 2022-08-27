@@ -1,7 +1,6 @@
-import React from "react"
-import DAppsComponent from "../../components/DApps/DApps"
+import React from "react";
 
 const DApps = () => {
-  return <DAppsComponent />
-}
-export default DApps
+  return <h1>DApps</h1>;
+};
+export default DApps;

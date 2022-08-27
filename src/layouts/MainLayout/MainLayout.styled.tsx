@@ -8,6 +8,22 @@ export const Container = styled(Box)`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.palette.background.paper};
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 50px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 50px;
+    background-color: ${({ theme }) => theme.palette.background.paper};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.palette.white[200]};
+    border-radius: 50px;
+  }
 `;
 
 export const Content = styled(Box)`

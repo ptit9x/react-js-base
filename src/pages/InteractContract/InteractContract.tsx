@@ -1,7 +1,6 @@
-import React from "react"
-import InteractContractComponent from "../../components/InteractContract/InteractContract"
+import React from "react";
 
 const InteractContract = () => {
-  return <InteractContractComponent />
-}
-export default InteractContract
+  return <h1>InteractContract</h1>;
+};
+export default InteractContract;
