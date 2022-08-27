@@ -21,7 +21,6 @@ const App = () => {
         <CssBaseline />
         <BrowserRouter>
           <RouterConfig />
-          {/* <Routes /> */}
         </BrowserRouter>
       </ThemeProvider>
     </MuiThemeProvider>

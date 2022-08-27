@@ -5,7 +5,7 @@ import Footer from "src/components/Footer/Footer";
 import Navbar from "src/components/Navbar/Navbar";
 import { BREAKPOINT } from "src/constants/styles";
 import { useWindowSize } from "src/hooks/useWindowSize";
-import { Content } from "./\bMainLayout.styled";
+import { Content } from "./MainLayout.styled";
 import Sidebar from "./Sidebar/Sidebar";
 
 const MainLayout = () => {
