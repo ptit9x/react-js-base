@@ -24,6 +24,7 @@ export const Table = styled(Paper)`
   background-color: ${({ theme }) => theme.palette.common.white};
   color: ${({ theme }) => theme.palette.text.secondary};
 `;
+
 export const TableHeadCus = styled(TableHead)`
   background-color: ${({ theme }) => theme.palette.common.black};
   color: ${({ theme }) => theme.palette.text.secondary};

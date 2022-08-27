@@ -8,14 +8,7 @@ import { useWindowSize } from "src/hooks/useWindowSize";
 import { Content } from "./\bMainLayout.styled";
 import Sidebar from "./Sidebar/Sidebar";
 
-interface Props {
-  disableFooter?: boolean;
-  disableNav?: boolean;
-}
-
-const MainLayout = (props: Props) => {
-  const { disableFooter = false, disableNav = false } = props;
-
+const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentWidth] = useWindowSize();
   function handleOpenSidebar(value: boolean) {
@@ -34,11 +27,11 @@ const MainLayout = (props: Props) => {
             Open Sidebar
           </Button>
         )}
-        {!disableNav && <Navbar />}
+        <Navbar />
         <Content>
           <Outlet />
         </Content>
-        {!disableFooter && <Footer />}
+        <Footer />
       </Container>
     </Box>
   );

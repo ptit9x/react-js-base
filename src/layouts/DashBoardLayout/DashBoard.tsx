@@ -1,16 +1,17 @@
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
 import { DashBoardStyle } from "./DashBoard.styled";
-
-interface Props {
+interface DashBoardLayoutProps {
   main?: ReactNode;
   sideRight?: ReactNode;
-  disableFooter?: boolean;
   disableSide?: boolean;
 }
 
-const DashBoardLayout = (props: Props) => {
-  const { main, sideRight, disableSide } = props;
+const DashBoardLayout = ({
+  main,
+  sideRight,
+  disableSide
+}: DashBoardLayoutProps) => {
   return (
     <DashBoardStyle>
       <Box sx={{ gridArea: "main" }}>{main}</Box>
