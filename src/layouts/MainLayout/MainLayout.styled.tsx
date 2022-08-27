@@ -7,6 +7,7 @@ export const Container = styled(Box)`
   overflow: auto;
   display: flex;
   flex-direction: column;
+  margin: 0 ${({ theme }) => theme.spacing(1.5)};
   background-color: ${({ theme }) => theme.palette.background.paper};
 
   ::-webkit-scrollbar {
