@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const SendToken = () => {
-  return <div>SendToken</div>
-}
+  return <div>SendToken</div>;
+};
 
-export default SendToken
+export default SendToken;

@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const DeployContract = () => {
-  return <div>DeployContract</div>
-}
+  return <div>DeployContract</div>;
+};
 
-export default DeployContract
+export default DeployContract;

@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const InteractContract = () => {
-  return <div>InteractContract</div>
-}
+  return <div>InteractContract</div>;
+};
 
-export default InteractContract
+export default InteractContract;
