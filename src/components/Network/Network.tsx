@@ -1,25 +1,29 @@
-import { Box, Typography, Stack } from "@mui/material";
 import React from "react";
+import { Box, Typography, Stack } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Network = () => {
-    return (
-        <Box p="20px" borderRadius="10px" style={{ background: "#fff" }}>
-            <Stack direction="row">
-                <div>
-                    <Typography variant="h6" fontWeight="bold" mb="10px">
-                        Network
-                    </Typography>
-                    <Typography variant="body1">ETH - Ethereum</Typography>
-                    <Typography variant="body1">Last Block: 15,402,326</Typography>
-                </div>
-                <img
-                    src="	https://www.myetherwallet.com/img/eth.5b2fc1fc.svg"
-                    alt="eth-icon"
-                    style={{ width: "60px", margin: "0 0 0 auto" }}
-                ></img>
-            </Stack>
-        </Box>
-    );
+  const { t } = useTranslation();
+  return (
+    <Box p="20px" borderRadius="10px" sx={{ background: "#fff" }}>
+      <Stack direction="row" justifyContent="space-between">
+        <div>
+          <Typography variant="h6" fontWeight="bold" mb="10px">
+            {t("network.network")}
+          </Typography>
+          <Typography variant="body1">{t("network.eth-ethereum")}</Typography>
+          <Typography variant="body1">
+            {t("network.last-block")}: 15,402,326
+          </Typography>
+        </div>
+        <img
+          src="	https://www.myetherwallet.com/img/eth.5b2fc1fc.svg"
+          alt="eth-icon"
+          width="60px"
+        ></img>
+      </Stack>
+    </Box>
+  );
 };
 
 export default Network;

@@ -20,13 +20,39 @@
   "my-personal-account": "My personal account",
   "refresh-balance": "Refresh Balance",
   "view-paper-wallet": "View paper wallet",
-  "my-eth-balance": "My ETH balance is empty",
-  "buy-crypto-now": "Buy Crypto Now",
-  "buy-eth-with": "Buy ETH with Credit Card",
-  "we-accept-credit": "We accept Credit card Visa",
-  "tip-send-ETH": "Tip: You can also send your ETH from another wallet!",
-  "my-token-value": "My Token Value",
-  "+custom": "+Custom",
-  "you-can-now-buy-crypto": " You can now Buy crypto with low fees",
-  "enjoy-low-fee": "Enjoy 0.7% fee when you select ‘Bank account’ as payment method."
+  "sendPage": {
+    "token": "Token",
+    "amount": "Amount",
+    "balance": "Balance",
+    "eth-balance-low": "Your ETH balance is too low",
+    "describe-eth": "Every transaction requires a small amount of ETH to execute. Even if you have tokens to swap, when your ETH balance is close to zero, you won't be able to send anything until you fund your account.",
+    "transfer-eth": "Transfer ETH from another account",
+    "buy-eth": "Buy ETH",
+    "to-address": "To address",
+    "fee": "Transaction fee",
+    "total": "Total",
+    "not-enough-eth": "Not enough ETH to cover network fee.",
+    "buy-more-eth": "Buy more ETH",
+    "fees-determined": "How are fees determined?",
+    "next": "Next",
+    "clear-all": "Clear All",
+    "send-accordion": {
+      "advanced": "Advanced",
+      "gas": "Gas Limit & Data",
+      "advanced-users-only": "For advanced users only",
+      "not-edit-fields": "Please don’t edit these fields unless you are an expert user & know what you’re doing. Entering the wrong information could result in your transaction failing or getting stuck.",
+      "reset": "Reset to default",
+      "gas-limit": "Gas Limit (usually ranges from 21,000 to 500,000)",
+      "add-data": "Add data"
+    }
+  },
+  "network": {
+    "network": "Network",
+    "eth-ethereum": "ETH - Ethereum",
+    "last-block": "Last Block"
+  },
+  "swapComponent": {
+    "swap": "Swap",
+    "more": "More"
+  }
 }

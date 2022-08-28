@@ -9,7 +9,6 @@ export const ItemPaper = styled(Box)`
 
 export const PrimaryTypo = styled(Typography)`
   color: #05c0a5;
-  font-weight: bold;
 `;
 
 export const FeeTypo = styled(Typography)`
