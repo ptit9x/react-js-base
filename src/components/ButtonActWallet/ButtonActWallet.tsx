@@ -5,7 +5,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 
 const BREAK_POINT_LAYOUT = 960;
-export interface AccessWalletItemProps {
+export interface ButtonActWalletProps {
   srcIcon: string;
   title: string;
   description: string;
@@ -22,7 +22,16 @@ const ImgStyled = styled.img`
   src: ${props => props.src};
 `;
 
-const AccessWalletItem = (props: AccessWalletItemProps) => {
+const ButtonStyled = styled(Button)`
+  text-transform: "none";
+  max-width: "600px";
+  margin: "16px";
+  color: "#000";
+  background-color: "#fff";
+  padding: "40px 20px 40px 40px";
+`;
+
+const ButtonActWallet = (props: ButtonActWalletProps) => {
   const [changeLayout, setChangeLayout] = useState(false);
   function handleChangeInnerSize() {
     if (window.innerWidth < BREAK_POINT_LAYOUT) {
@@ -39,15 +48,19 @@ const AccessWalletItem = (props: AccessWalletItemProps) => {
   }, []);
 
   return (
-    <Button
+    <ButtonStyled
       variant="contained"
       sx={{
         textTransform: "none",
-        maxWidth: "600px",
+        width: "650px",
         m: "16px",
         color: "#000",
         backgroundColor: "#fff",
-        p: "40px 20px 40px 40px"
+        p: "40px 20px 40px 40px",
+        borderRadius: "10px",
+        "@media screen and (max-width: 650px)": {
+          maxWidth: "650px"
+        }
       }}
       onClick={props.onClick}
     >
@@ -75,13 +88,23 @@ const AccessWalletItem = (props: AccessWalletItemProps) => {
               </Grid>
             ) : null}
             <Grid item>
-              <Typography gutterBottom variant="h6" fontWeight={700}>
+              <Typography
+                gutterBottom
+                variant="h6"
+                fontWeight={theme => theme.typography.fontWeightBold}
+                fontSize="1.429rem"
+              >
                 {props.title}
               </Typography>
             </Grid>
           </Grid>
           <Grid item xs>
-            <Typography align="left" variant="body2" gutterBottom>
+            <Typography
+              align="left"
+              variant="body2"
+              fontSize="1.143rem"
+              gutterBottom
+            >
               {props.description}
             </Typography>
           </Grid>
@@ -97,7 +120,7 @@ const AccessWalletItem = (props: AccessWalletItemProps) => {
           />
         </Grid>
       ) : null}
-    </Button>
+    </ButtonStyled>
   );
 };
-export default AccessWalletItem;
+export default ButtonActWallet;

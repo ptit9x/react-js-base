@@ -102,7 +102,7 @@ export type CustomizedTheme = typeof theme;
 
 declare module "@emotion/react" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface Theme extends CustomizedTheme {}
+  export interface Theme extends CustomizedTheme { }
 }
 
 export default theme;
