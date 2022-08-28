@@ -12,8 +12,8 @@ const Navbar = () => {
     <div
       style={{
         width: "100%",
-        backgroundColor: theme.palette.blue[500],
-        minHeight: "60px"
+        backgroundColor: theme.palette.background.paper,
+        minHeight: "60px",
       }}
     >
       <OpenSidebarButton
