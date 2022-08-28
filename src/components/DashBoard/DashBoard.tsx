@@ -14,12 +14,10 @@ const Dashboard = ({ loading }: DasboardProps) => {
   return (
     <>
       <ItemPaper elevation={2} square>
-        <h2>{t("My ETH balance is empty")}</h2>
-        <ButtonCusTom>{t("Buy Crypto Now")}</ButtonCusTom>
-        <div>{t("We accept Credit card Visa")}</div>
-        <span className="text-alight">
-          {t("Tip: You can also send your ETH from another wallet!")}
-        </span>
+        <h2>{t("my-eth-balance")}</h2>
+        <ButtonCusTom>{t("buy-crypto-now")}</ButtonCusTom>
+        <div>{t("we-accept-credit")}</div>
+        <span className="text-alight">{t("tip-you-can-send-your-ETH")}</span>
       </ItemPaper>
 
       <Table elevation={2} square>
@@ -31,8 +29,8 @@ const Dashboard = ({ loading }: DasboardProps) => {
             alignItems: "center",
           }}
         >
-          <h3>{t("My Token Value")}</h3>
-          <Typography>{t("+Custom")}</Typography>
+          <h3>{t("my-token-value")}</h3>
+          <Typography>{t("+custom")}</Typography>
         </Box>
         <StickyHeadTable></StickyHeadTable>
       </Table>
