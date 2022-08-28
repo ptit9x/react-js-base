@@ -3,13 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Box, Typography } from "@mui/material";
 import { ItemPaper, ButtonCusTom } from "src/assets/common.styled";
 import StickyHeadTable from "../Table/StickyTable";
-import { Table } from "./DashBoard.styled";
+import { Table } from "./DashBoardIntroduce.styled";
 
-interface DasboardProps {
-  loading?: boolean;
-}
-
-const Dashboard = ({ loading }: DasboardProps) => {
+const DashBoardIntroduce = () => {
   const { t } = useTranslation();
   return (
     <>
@@ -17,7 +13,7 @@ const Dashboard = ({ loading }: DasboardProps) => {
         <h2>{t("my-eth-balance")}</h2>
         <ButtonCusTom>{t("buy-crypto-now")}</ButtonCusTom>
         <div>{t("we-accept-credit")}</div>
-        <span className="text-alight">{t("tip-you-can-send-your-ETH")}</span>
+        <span className="text-alight">{t("tip-send-ETH")}</span>
       </ItemPaper>
 
       <Table elevation={2} square>
@@ -38,4 +34,4 @@ const Dashboard = ({ loading }: DasboardProps) => {
   );
 };
 
-export default Dashboard;
+export default DashBoardIntroduce;

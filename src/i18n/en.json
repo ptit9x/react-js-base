@@ -23,7 +23,7 @@
   "my-eth-balance": "My ETH balance is empty",
   "buy-crypto-now": "Buy Crypto Now",
   "we-accept-credit": "We accept Credit card Visa",
-  "tip-you-can-send-your-ETH": "Tip: You can also send your ETH from another wallet!",
+  "tip-send-ETH": "Tip: You can also send your ETH from another wallet!",
   "my-token-value": "My Token Value",
   "+custom": "+Custom"
 }
