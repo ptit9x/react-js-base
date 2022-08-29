@@ -1,4 +1,4 @@
-import { Grid, Typography, Link } from "@mui/material";
+import { Grid, Typography, Link, Box } from "@mui/material";
 import { ButtonActWalletProps } from "../../components/ButtonActWallet/ButtonActWallet";
 import ButtonActWallet from "../../components/ButtonActWallet/ButtonActWallet";
 import Web3 from "web3/dist/web3.min.js";
@@ -48,7 +48,7 @@ const AccessWallet = () => {
   ];
 
   return (
-    <div>
+    <Box sx={{ p: "16px" }}>
       <Grid
         container
         direction="column"
@@ -96,7 +96,7 @@ const AccessWallet = () => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Box>
   );
 };
 export default AccessWallet;

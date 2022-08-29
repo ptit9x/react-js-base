@@ -53,13 +53,14 @@ const ButtonActWallet = (props: ButtonActWalletProps) => {
       sx={{
         textTransform: "none",
         width: "650px",
-        m: "16px",
         color: "#000",
+        mb: "20px",
         backgroundColor: "#fff",
+        boxSizing: "border-box",
         p: "40px 20px 40px 40px",
         borderRadius: "10px",
         "@media screen and (max-width: 650px)": {
-          maxWidth: "650px"
+          width: "100%"
         }
       }}
       onClick={props.onClick}
