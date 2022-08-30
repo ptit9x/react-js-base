@@ -1,7 +1,6 @@
 import React from "react";
-import DeployContractComponent from "../../components/DeployContract/DeployContract";
 
 const DeployContract = () => {
-  return <DeployContractComponent />;
+  return <h1>DeployContract</h1>;
 };
 export default DeployContract;

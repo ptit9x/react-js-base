@@ -3,10 +3,9 @@ import { CssBaseline, ThemeProvider as MuiThemeProvider } from "@mui/material";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
-
-import { useGlobalContext } from "../context/GlobalContext";
-import Routes from "../router";
-import theme from "../theme";
+import { useGlobalContext } from "src/context/GlobalContext";
+import RouterConfig from "src/router";
+import theme from "src/theme";
 
 const App = () => {
   const { i18n } = useTranslation();
@@ -21,7 +20,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <Routes />
+          <RouterConfig />
         </BrowserRouter>
       </ThemeProvider>
     </MuiThemeProvider>

@@ -1,7 +1,6 @@
 import React from "react";
-import SwapTokenComponent from "../../components/SwapToken/SwapToken";
 
 const SwapToken = () => {
-  return <SwapTokenComponent />;
+  return <h1>SwapToken</h1>;
 };
 export default SwapToken;

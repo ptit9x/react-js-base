@@ -1,7 +1,15 @@
 import React from "react";
-import DashboardComponent from "../../components/Dashboard/Dashboard";
+import { ItemPaper } from "src/assets/common.styled";
+import DashBoardIntroduce from "src/components/DashBoardIntroduce/DashBoardIntroduce";
+import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
 
-const Dashboard = () => {
-  return <DashboardComponent />;
+const DashboardPage = () => {
+  return (
+    <DashBoardLayout
+      main={<DashBoardIntroduce />}
+      sideRight={<ItemPaper></ItemPaper>}
+    ></DashBoardLayout>
+  );
 };
-export default Dashboard;
+
+export default DashboardPage;
