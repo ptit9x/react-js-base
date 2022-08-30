@@ -31,7 +31,13 @@ const ButtonStyled = styled(Button)`
   padding: "40px 20px 40px 40px";
 `;
 
-const ButtonActWallet = (props: ButtonActWalletProps) => {
+const ButtonActWallet = ({
+  srcIcon,
+  title,
+  description,
+  isOfficial,
+  onClick
+}: ButtonActWalletProps) => {
   const [changeLayout, setChangeLayout] = useState(false);
   function handleChangeInnerSize() {
     if (window.innerWidth < BREAK_POINT_LAYOUT) {
@@ -63,29 +69,19 @@ const ButtonActWallet = (props: ButtonActWalletProps) => {
           width: "100%"
         }
       }}
-      onClick={props.onClick}
+      onClick={onClick}
     >
       <Grid container>
         {!changeLayout ? (
           <Grid item>
-            <ImgStyled
-              width="70"
-              height="70"
-              alt={props.title}
-              src={props.srcIcon}
-            />
+            <ImgStyled width="70" height="70" alt={title} src={srcIcon} />
           </Grid>
         ) : null}
         <Grid item container sm>
           <Grid item container alignItems="center">
             {changeLayout ? (
               <Grid item>
-                <ImgStyled
-                  width="50"
-                  height="50"
-                  alt={props.title}
-                  src={props.srcIcon}
-                />
+                <ImgStyled width="50" height="50" alt={title} src={srcIcon} />
               </Grid>
             ) : null}
             <Grid item>
@@ -95,7 +91,7 @@ const ButtonActWallet = (props: ButtonActWalletProps) => {
                 fontWeight={theme => theme.typography.fontWeightBold}
                 fontSize="1.429rem"
               >
-                {props.title}
+                {title}
               </Typography>
             </Grid>
           </Grid>
@@ -106,12 +102,12 @@ const ButtonActWallet = (props: ButtonActWalletProps) => {
               fontSize="1.143rem"
               gutterBottom
             >
-              {props.description}
+              {description}
             </Typography>
           </Grid>
         </Grid>
       </Grid>
-      {props.isOfficial ? (
+      {isOfficial ? (
         <Grid item>
           <Chip
             size="small"

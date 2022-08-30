@@ -2,8 +2,9 @@ import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 
 import { PATH } from "./constants/paths";
+import AuthenticatedGuard from "./guards/AuthenticatedGuard";
 // import PublicGuard from "./guards/PublicGuard";
-import MainLayout from "./layouts/MainLayout/MainLayout";
+const MainLayout = lazy(() => import("./layouts/MainLayout/MainLayout"));
 const GuestLayout = lazy(() => import("./layouts/GuestLayout/GuestLayout"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
 const AccessWallet = lazy(() => import("./pages/AccessWallet/AccessWallet"));
@@ -38,9 +39,9 @@ const RouterConfig = () => {
     {
       path: PATH.HOME,
       element: (
-        // <AuthenticatedGuard>
-        <MainLayout />
-        //  </AuthenticatedGuard>
+        <AuthenticatedGuard>
+          <MainLayout />
+        </AuthenticatedGuard>
       ),
       children: [
         {
