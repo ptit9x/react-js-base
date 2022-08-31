@@ -1,41 +1,39 @@
 import React from "react";
-import {
-  ButtonClear,
-  ButtonDisable,
-  ButtonPopover,
-  FeeTypo,
-  ItemPaper,
-  PrimaryTypo
-} from "./SendToken.styled";
-import {
-  Box,
-  Typography,
-  Grid,
-  Autocomplete,
-  TextField,
-  Popover
-} from "@mui/material";
+import { Box, Typography, Grid, Autocomplete, TextField } from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Stack } from "@mui/system";
+import { FeeTypo, PrimaryTypo } from "./SendToken.styled";
+import SendAccordion from "src/components/SendToken/SendAccordion";
+import { useTranslation } from "react-i18next";
+import { ButtonCusTom, ItemPaper } from "src/assets/common.styled";
 
-const SendToken = () => {
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
+interface SendTokenProps {
+  token?: string;
+  amount?: number;
+  balance?: number;
+  address?: string;
+  fee?: number;
+  time?: string;
+  total?: string;
+  gasLimit?: number;
+  addData?: string;
+}
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+const SendTokenMain = ({
+  token,
+  amount,
+  balance,
+  address,
+  fee,
+  time,
+  total = "0.000318",
+  gasLimit,
+  addData,
+}: SendTokenProps) => {
+  const { t } = useTranslation();
   return (
     <ItemPaper>
       <h2>Send</h2>
@@ -142,37 +140,10 @@ const SendToken = () => {
           justifyContent="space-between"
         >
           <Stack direction="row" alignItems="center">
-            <FeeTypo>Not enough ETH to cover network fee. </FeeTypo>
-            <PrimaryTypo> Buy more ETH</PrimaryTypo>
+            <FeeTypo>{t("sendPage.not-enough-eth")} </FeeTypo>
+            <PrimaryTypo>{t("sendPage.buy-more-eth")}</PrimaryTypo>
           </Stack>
-          <FeeTypo>How are fees determined?</FeeTypo>
-        </Stack>
-      </Box>
-      <ButtonPopover
-        aria-describedby={id}
-        onClick={handleClick}
-        variant="contained"
-      >
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          width="100%"
-        >
-          <Typography variant="body1" fontWeight="bold" textTransform="none">
-            Advanced
-          </Typography>
-          <Stack direction="row" alignItems="center">
-            <Typography
-              variant="body2"
-              color="#5e6b8d"
-              textAlign="end"
-              textTransform="none"
-            >
-              Gas Limit & Data
-            </Typography>
-            <KeyboardArrowDownIcon />
-          </Stack>
+          <FeeTypo>{t("sendPage.fees-determined")}</FeeTypo>
         </Stack>
       </ButtonPopover>
       <Popover
@@ -207,37 +178,25 @@ const SendToken = () => {
               know what you’re doing. Entering the wrong information could
               result in your transaction failing or getting stuck.
             </Typography>
-          </Box>
-          <PrimaryTypo variant="body2" textAlign="end" mb="20px">
-            Reset to default: 21,000
-          </PrimaryTypo>
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-gas"
-            options={[]}
-            sx={{ width: "100%", mb: "20px" }}
-            value="21000"
-            renderInput={params => (
-              <TextField
-                {...params}
-                label="Gas Limit (usually ranges from 21,000 to 500,000)"
-              />
-            )}
-          />
-
-          <Autocomplete
-            disablePortal
-            id="combo-box-add"
-            options={[]}
-            value="0x"
-            sx={{ width: "100%", mb: "20px" }}
-            renderInput={params => <TextField {...params} label="Add data" />}
-          />
-        </div>
-      </Popover>
-      <ButtonDisable disabled>Next</ButtonDisable>
-      <ButtonClear>Clear All</ButtonClear>
+      </Box>
+      <Box paddingY="20px">
+        <SendAccordion gasLimit={gasLimit} addData={addData} />
+      </Box>
+      <Grid display="flex" justifyContent="center">
+        <ButtonCusTom disabled padd="0.7rem 2rem">
+          {t("sendPage.next")}
+        </ButtonCusTom>
+      </Grid>
+      <Box padding={1}></Box>
+      <Grid display="flex" justifyContent="center">
+        <ButtonCusTom
+          padd="0.7rem 2rem"
+          backgroundColor="#f2f3f6"
+          colorButton="#646464"
+        >
+          {t("sendPage.clear-all")}
+        </ButtonCusTom>
+      </Grid>
     </ItemPaper>
   );
 };

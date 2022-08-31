@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Typography, Stack, Link } from "@mui/material";
-import SwapItem from "./SwapItem/SwapItem";
+import { Typography, Stack, Link } from "@mui/material";
+import SwapItem from "./SwapItem";
 import { useTranslation } from "react-i18next";
 
 const swapListItem = [

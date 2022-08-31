@@ -1,11 +1,5 @@
 import styled from "@emotion/styled";
-import { Box, Button, Typography } from "@mui/material";
-
-export const ItemPaper = styled(Box)`
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-`;
+import { Button, Typography } from "@mui/material";
 
 export const PrimaryTypo = styled(Typography)`
   color: #05c0a5;
