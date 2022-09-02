@@ -19,7 +19,7 @@ const RouterConfig = () => {
         // <PublicGuard>
         <AccessWallet />
         // </PublicGuard>
-      ),
+      )
     },
     {
       path: PATH.CREATE_WALLET,
@@ -27,7 +27,7 @@ const RouterConfig = () => {
         // <PublicGuard>
         <CreateWallet />
         // </PublicGuard>
-      ),
+      )
     },
     {
       path: PATH.HOME,
@@ -39,42 +39,42 @@ const RouterConfig = () => {
       children: [
         {
           path: PATH.NFT,
-          element: <NFT />,
+          element: <NFT />
         },
         {
           path: PATH.HOME,
-          element: <Navigate to={PATH.DASHBOARD} />,
+          element: <Navigate to={PATH.DASHBOARD} />
         },
         {
           path: PATH.DASHBOARD,
-          element: <Dashboard />,
+          element: <Dashboard />
         },
         {
           path: PATH.DAPPS,
-          element: <DApps />,
+          element: <DApps />
         },
         {
           path: PATH.DEPLOY_CONTRACT,
-          element: <DeployContract />,
+          element: <DeployContract />
         },
         {
           path: PATH.INTERACT_CONTRACT,
-          element: <InteractContract />,
+          element: <InteractContract />
         },
         {
           path: PATH.SETTINGS,
-          element: <></>,
+          element: <></>
         },
         {
           path: PATH.SEND_TOKEN,
-          element: <SendToken />,
+          element: <SendToken />
         },
         {
           path: PATH.SWAP_TOKEN,
-          element: <SwapToken />,
-        },
-      ],
-    },
+          element: <SwapToken />
+        }
+      ]
+    }
   ]);
   return createRoutes;
 };

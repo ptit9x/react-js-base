@@ -10,7 +10,7 @@ interface ContentLayoutProps {
 const ContentLayout = ({
   main,
   sideRight,
-  disableSide,
+  disableSide
 }: ContentLayoutProps) => {
   return (
     <ContentLayoutStyle>

@@ -2,6 +2,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 import { useLayoutEffect, useState } from "react";
 import icon_logo from "src/assets/icons/logo-mew.svg";
+import { menuItems } from "src/constants/sidebarMenu";
 import { BREAKPOINT } from "src/constants/styles";
 import { usePrevious } from "src/hooks/usePrevious";
 import { useWindowSize } from "src/hooks/useWindowSize";
@@ -11,7 +12,7 @@ import theme from "src/theme";
 import { onCloseSidebar } from "../MainLayout.reducer";
 import AccountCard from "./AccountCard/AccountCard";
 import ActionButtons from "./ActionButtons/ActionButtons";
-import Menu from "./Menu/Menu";
+import MenuItem from "./MenuItem/MenuItem";
 import { AccountInfo, Drawer, List, LogoWrapper } from "./Sidebar.styled";
 
 enum Variant {
@@ -29,6 +30,7 @@ const Sidebar = () => {
   useLayoutEffect(() => {
     if (currentWidth <= BREAKPOINT.XL) {
       setDrawerVariant(Variant.Temporary);
+
       if (oldVariant === Variant.Permanent) {
         dispatch(onCloseSidebar());
       }
@@ -60,7 +62,10 @@ const Sidebar = () => {
 
       <List disablePadding>
         <ActionButtons />
-        <Menu />
+
+        {menuItems.map((item, i) => (
+          <MenuItem {...item} key={i} />
+        ))}
       </List>
     </Drawer>
   );
