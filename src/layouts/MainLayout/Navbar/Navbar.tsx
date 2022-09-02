@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import icon_open_sidebar from "src/assets/icons/icon-open-sidebar.svg";
 import { BREAKPOINT } from "src/constants/styles";
 import { useAppDispatch } from "src/store";
@@ -9,12 +10,12 @@ import { OpenSidebarButton } from "./Navbar.styled";
 const Navbar = () => {
   const dispatch = useAppDispatch();
   return (
-    <div
-      style={{
-        width: "100%",
-        backgroundColor: theme.palette.background.paper,
-        minHeight: "60px",
-      }}
+    <Box
+    // style={{
+    //   width: "100%",
+    //   backgroundColor: theme.palette.background.paper,
+    //   minHeight: "60px",
+    // }}
     >
       <OpenSidebarButton
         onClick={() => dispatch(onOpenSidebar())}
@@ -23,7 +24,7 @@ const Navbar = () => {
         <img src={icon_open_sidebar} alt="open-sidebar" width="40px" />
       </OpenSidebarButton>
       Navbar
-    </div>
+    </Box>
   );
 };
 
