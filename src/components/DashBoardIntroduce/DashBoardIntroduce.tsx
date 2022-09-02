@@ -22,7 +22,7 @@ const DashBoardIntroduce = () => {
             display: "flex",
             justifyContent: "space-between",
             padding: "0rem 1rem",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <h3>{t("my-token-value")}</h3>

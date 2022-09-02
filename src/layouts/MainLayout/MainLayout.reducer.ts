@@ -12,10 +12,10 @@ export const mainLayoutSlice = createSlice({
   name: "mainLayout",
   initialState: initialState,
   reducers: {
-    onOpenSidebar: state => {
+    onOpenSidebar: (state: MainLayoutState) => {
       state.isOpenSidebar = true;
     },
-    onCloseSidebar: state => {
+    onCloseSidebar: (state: MainLayoutState) => {
       state.isOpenSidebar = false;
     }
   }

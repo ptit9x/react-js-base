@@ -1,25 +1,25 @@
-import React, { useReducer, useContext, createContext } from "react"
+import React, { useReducer, useContext, createContext } from "react";
 
 type IProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 type IContext = {
-  language?: string
-  setLanguage: (language: string) => void
-}
+  language?: string;
+  setLanguage: (language: string) => void;
+};
 
 type IAction = {
-  type: string
-  payload: any
-}
+  type: string;
+  payload: any;
+};
 
 const initialState = {
   language: process.env.REACT_APP_LANGUAGE,
-  setLanguage: () => { }
-}
+  setLanguage: () => {}
+};
 
-const GlobalContext = createContext<IContext>(initialState)
+const GlobalContext = createContext<IContext>(initialState);
 
 const reducer = (state: IContext, { type, payload }: IAction) => {
   switch (type) {
@@ -27,22 +27,22 @@ const reducer = (state: IContext, { type, payload }: IAction) => {
       return {
         ...state,
         language: payload
-      }
+      };
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
 const GlobalProvider = ({ children }: IProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const _handleChangeLanguage = (language: string) => {
     dispatch({
       type: "SET_LANGUAGE",
       payload: language
-    })
-  }
+    });
+  };
 
   return (
     <GlobalContext.Provider
@@ -53,9 +53,9 @@ const GlobalProvider = ({ children }: IProps) => {
     >
       {children}
     </GlobalContext.Provider>
-  )
-}
+  );
+};
 
-const useGlobalContext = () => useContext(GlobalContext)
+const useGlobalContext = () => useContext(GlobalContext);
 
-export { GlobalContext, GlobalProvider, useGlobalContext }
+export { GlobalContext, GlobalProvider, useGlobalContext };
