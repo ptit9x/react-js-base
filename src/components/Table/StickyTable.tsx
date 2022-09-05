@@ -89,9 +89,9 @@ export default function StickyHeadTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHeadCus>
             <TableRow>
-              {columns.map(column => (
+              {columns.map((column, key) => (
                 <TableCell
-                  key={column.id}
+                  key={key}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
@@ -103,19 +103,23 @@ export default function StickyHeadTable() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(row => {
+              .map((row, key) => {
                 return (
                   <TableRow
                     sx={{ borderRadius: "1rem" }}
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={row.code}
+                    key={key}
                   >
-                    {columns.map(column => {
+                    {columns.map((column, key) => {
                       const value = row[column.id];
                       return (
-                        <ItemTable value={value} column={column}></ItemTable>
+                        <ItemTable
+                          key={key}
+                          value={value}
+                          column={column}
+                        ></ItemTable>
                       );
                     })}
                   </TableRow>
@@ -124,14 +128,6 @@ export default function StickyHeadTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   );
 }

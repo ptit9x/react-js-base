@@ -6,5 +6,5 @@ export const Table = styled(Paper)`
   border-radius: 0.7rem;
   margin-bottom: ${({ theme }) => theme.spacing(3)};
   background-color: ${({ theme }) => theme.palette.common.white};
-  color: ${({ theme }) => theme.palette.text.secondary};
+  color: ${({ theme }) => theme.palette.text.primary};
 `;
