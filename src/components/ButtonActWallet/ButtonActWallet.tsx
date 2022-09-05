@@ -3,6 +3,7 @@ import GppGoodIcon from "@mui/icons-material/GppGood";
 import { useEffect } from "react";
 import { useState } from "react";
 import styled from "@emotion/styled";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 const BREAK_POINT_LAYOUT = 960;
 export interface ButtonActWalletProps {
@@ -39,8 +40,9 @@ const ButtonActWallet = ({
   onClick
 }: ButtonActWalletProps) => {
   const [changeLayout, setChangeLayout] = useState(false);
+  const sizes = useWindowSize();
   function handleChangeInnerSize() {
-    if (window.innerWidth < BREAK_POINT_LAYOUT) {
+    if (sizes[0] < BREAK_POINT_LAYOUT) {
       setChangeLayout(true);
     } else {
       setChangeLayout(false);
@@ -51,7 +53,8 @@ const ButtonActWallet = ({
 
     window.addEventListener("resize", handleChangeInnerSize);
     return () => window.removeEventListener("resize", handleChangeInnerSize);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sizes[0]]);
 
   return (
     <ButtonStyled
