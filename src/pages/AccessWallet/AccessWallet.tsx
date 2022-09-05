@@ -47,6 +47,14 @@ const AccessWallet = () => {
       description: "Use your Web3 wallet with MEW",
       isOfficial: true,
       onClick: openWeb3Wallet
+    },
+    {
+      srcIcon:
+        "https://www.myetherwallet.com/img/icon-mobile-apps.40f4eb5f.png",
+      title: "Mobile Apps",
+      description: "WalletConnect, WalletLink",
+      isOfficial: false,
+      onClick: openWeb3Wallet
     }
   ];
 

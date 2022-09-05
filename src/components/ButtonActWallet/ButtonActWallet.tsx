@@ -60,19 +60,20 @@ const ButtonActWallet = ({
   return (
     <ButtonStyled
       variant="contained"
-      sx={{
+      sx={theme => ({
         textTransform: "none",
         width: "650px",
-        color: "#000",
-        mb: "20px",
-        backgroundColor: "#fff",
+        color: theme.palette.common.black,
+        m: "20px 0px",
+        backgroundColor: theme.palette.common.white,
         boxSizing: "border-box",
         p: "40px 20px 40px 40px",
         borderRadius: "10px",
         "@media screen and (max-width: 650px)": {
-          width: "100%"
+          width: "100%",
+          p: "24px 20px 24px 24px"
         }
-      }}
+      })}
       onClick={onClick}
     >
       <Grid container>

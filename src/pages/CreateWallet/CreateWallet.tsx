@@ -1,4 +1,4 @@
-import { Grid, Typography, Link } from "@mui/material";
+import { Grid, Typography, Link, Box } from "@mui/material";
 import AccessWalletItem from "../../components/ButtonActWallet/ButtonActWallet";
 import { ButtonActWalletProps } from "../../components/ButtonActWallet/ButtonActWallet";
 import { PATH } from "../../constants/paths";
@@ -28,7 +28,7 @@ const CreateWallet = () => {
   ];
 
   return (
-    <div>
+    <Box sx={{ p: "16px" }}>
       <Grid
         container
         direction="column"
@@ -65,7 +65,7 @@ const CreateWallet = () => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Box>
   );
 };
 export default CreateWallet;
