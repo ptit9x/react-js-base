@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { BREAKPOINT } from "src/constants/styles";
 import { useWindowSize } from "src/hooks/useWindowSize";
 import { useAppDispatch } from "src/store";
+import { useTranslation } from "react-i18next";
 import theme from "src/theme";
 
 import { onCloseSidebar } from "../../MainLayout.reducer";
@@ -26,11 +27,12 @@ const MenuItem = ({
   subMenuItems,
   hasDivider = false
 }: MenuItemProps) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isExpandable = subMenuItems && subMenuItems.length > 0;
   const [currentWidth] = useWindowSize();
   const [subMenuOpen, setSubMenuOpen] = useState(false);
+  const isExpandable = subMenuItems && subMenuItems.length > 0;
 
   function handleClick() {
     setSubMenuOpen(!subMenuOpen);
@@ -58,7 +60,7 @@ const MenuItem = ({
         )}
 
         <ListItemText
-          primary={name}
+          primary={t(name)}
           inset={!icon}
           disableTypography
           sx={{
