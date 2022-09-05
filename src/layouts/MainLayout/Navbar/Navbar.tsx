@@ -1,13 +1,12 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { useTranslation } from "react-i18next";
 import { ButtonCusTom } from "src/assets/common.styled";
 import icon_open_sidebar from "src/assets/icons/icon-open-sidebar.svg";
 import { BREAKPOINT } from "src/constants/styles";
 import { useAppDispatch } from "src/store";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import theme from "src/theme";
-
 import { onOpenSidebar } from "../MainLayout.reducer";
 import { OpenSidebarButton } from "./Navbar.styled";
 
