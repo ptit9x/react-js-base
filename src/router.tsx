@@ -45,16 +45,16 @@ const RouterConfig = () => {
       ),
       children: [
         {
+          path: PATH.NFT,
+          element: <NFT />
+        },
+        {
           path: PATH.HOME,
           element: <Navigate to={PATH.DASHBOARD} />
         },
         {
           path: PATH.DASHBOARD,
           element: <Dashboard />
-        },
-        {
-          path: PATH.NFT,
-          element: <NFT />
         },
         {
           path: PATH.DAPPS,
