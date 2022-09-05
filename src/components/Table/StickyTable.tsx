@@ -25,22 +25,22 @@ const columns: readonly Column[] = [
     label: "Population",
     minWidth: 170,
     align: "right",
-    format: (value: number) => value.toLocaleString("en-US"),
+    format: (value: number) => value.toLocaleString("en-US")
   },
   {
     id: "size",
     label: "Size\u00a0(km\u00b2)",
     minWidth: 170,
     align: "right",
-    format: (value: number) => value.toLocaleString("en-US"),
+    format: (value: number) => value.toLocaleString("en-US")
   },
   {
     id: "density",
     label: "Density",
     minWidth: 170,
     align: "right",
-    format: (value: number) => value.toFixed(2),
-  },
+    format: (value: number) => value.toFixed(2)
+  }
 ];
 
 interface Data {
@@ -65,7 +65,7 @@ const rows = [
   createData("India", "IN", 1324171354, 3287263),
   createData("China", "CN", 1403500365, 9596961),
   createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520),
+  createData("United States", "US", 327167434, 9833520)
 ];
 
 export default function StickyHeadTable() {
@@ -89,9 +89,9 @@ export default function StickyHeadTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHeadCus>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column, key) => (
                 <TableCell
-                  key={column.id}
+                  key={key}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
@@ -103,19 +103,23 @@ export default function StickyHeadTable() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row, key) => {
                 return (
                   <TableRow
                     sx={{ borderRadius: "1rem" }}
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={row.code}
+                    key={key}
                   >
-                    {columns.map((column) => {
+                    {columns.map((column, key) => {
                       const value = row[column.id];
                       return (
-                        <ItemTable value={value} column={column}></ItemTable>
+                        <ItemTable
+                          key={key}
+                          value={value}
+                          column={column}
+                        ></ItemTable>
                       );
                     })}
                   </TableRow>
@@ -124,14 +128,6 @@ export default function StickyHeadTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   );
 }

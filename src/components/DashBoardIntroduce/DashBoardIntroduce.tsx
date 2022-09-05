@@ -28,8 +28,8 @@ const DashBoardIntroduce = () => {
           <h3>{t("my-token-value")}</h3>
           <Typography>{t("+custom")}</Typography>
         </Box>
-        <StickyHeadTable></StickyHeadTable>
       </Table>
+      <StickyHeadTable></StickyHeadTable>
     </>
   );
 };

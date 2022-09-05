@@ -30,7 +30,6 @@ export const Container = styled(Box)`
 export const Content = styled(Box)`
   max-width: 1185px;
   margin: auto;
-  margin-bottom: 0.5rem;
   width: 100%;
   min-height: ${({ theme }) => theme.spacing(37.5)};
   flex-grow: 1;
