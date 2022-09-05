@@ -64,7 +64,7 @@ const ButtonActWallet = ({
         textTransform: "none",
         width: "650px",
         color: theme.palette.common.black,
-        m: "20px 0px",
+        mt: "20px",
         backgroundColor: theme.palette.common.white,
         boxSizing: "border-box",
         p: "40px 20px 40px 40px",

@@ -9,7 +9,8 @@ import {
   Toolbar,
   Tooltip,
   Typography,
-  Box
+  Box,
+  useTheme
 } from "@mui/material";
 import React from "react";
 import AdbIcon from "@mui/icons-material/Adb";
@@ -28,6 +29,7 @@ const HeaderGuest = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const theme = useTheme();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -50,7 +52,11 @@ const HeaderGuest = () => {
           <Toolbar disableGutters>
             <AdbIcon
               fontSize="large"
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1, color: "#fff" }}
+              sx={{
+                display: { xs: "none", md: "flex" },
+                mr: 1,
+                color: theme.palette.common.white
+              }}
             />
             <Typography
               variant="h3"
@@ -60,10 +66,10 @@ const HeaderGuest = () => {
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
+                fontFamily: theme.typography.fontFamily,
+                fontWeight: theme.typography.fontWeightBold,
                 letterSpacing: ".3rem",
-                color: "#fff",
+                color: theme.palette.common.white,
                 textDecoration: "none"
               }}
             >
@@ -74,7 +80,7 @@ const HeaderGuest = () => {
               sx={{
                 flexGrow: 1,
                 display: { xs: "flex", md: "none" },
-                color: "#fff"
+                color: theme.palette.common.white
               }}
             >
               <IconButton
@@ -103,7 +109,7 @@ const HeaderGuest = () => {
                 onClose={handleCloseNavMenu}
                 sx={{
                   display: { xs: "block", md: "none" },
-                  color: "#fff"
+                  color: theme.palette.common.white
                 }}
               >
                 {pages.map(page => (
@@ -112,7 +118,7 @@ const HeaderGuest = () => {
                       textAlign="center"
                       sx={{
                         display: { xs: "block", md: "none" },
-                        color: "#000"
+                        color: theme.palette.common.black
                       }}
                     >
                       {page}
@@ -131,10 +137,10 @@ const HeaderGuest = () => {
                 mr: 2,
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
+                fontFamily: theme.typography.fontFamily,
+                fontWeight: theme.typography.fontWeightBold,
                 letterSpacing: ".3rem",
-                color: "#fff",
+                color: theme.palette.common.white,
                 textDecoration: "none"
               }}
             >
@@ -144,7 +150,7 @@ const HeaderGuest = () => {
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
-                color: "#fff"
+                color: theme.palette.common.white
               }}
             >
               {pages.map(page => (
@@ -154,7 +160,7 @@ const HeaderGuest = () => {
                   sx={{
                     my: 2,
                     display: "block",
-                    color: "#fff"
+                    color: theme.palette.common.white
                   }}
                 >
                   {page}

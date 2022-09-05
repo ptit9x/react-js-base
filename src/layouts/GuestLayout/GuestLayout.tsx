@@ -1,7 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
-import HeaderGuest from "src/components/HeaderGuest/HeaderGuest";
+import Header from "./Header";
 const BoxStyled = styled(Box)`
   background-color: ${({ theme }) => theme.palette.primary.main};
   padding-bottom: 70px;
@@ -11,7 +11,7 @@ const BoxStyled = styled(Box)`
 const GuestLayout = () => {
   return (
     <div>
-      <HeaderGuest />
+      <Header />
       <BoxStyled>
         <Grid
           container
