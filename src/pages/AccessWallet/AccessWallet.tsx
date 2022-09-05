@@ -1,20 +1,23 @@
 import { Grid, Typography, Link, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { ButtonActWalletProps } from "../../components/ButtonActWallet/ButtonActWallet";
 import ButtonActWallet from "../../components/ButtonActWallet/ButtonActWallet";
-import Web3 from "web3/dist/web3.min.js";
 import { store } from "../../store";
 import { appSlice } from "../../App/App.reducer";
 import Wallet from "../../common/Wallet";
 import { PATH } from "../../constants/paths";
+import useWeb3 from "../../hooks/useWeb3";
+
 const AccessWallet = () => {
+  const navigate = useNavigate();
+  const web3 = useWeb3();
+
   async function openWeb3Wallet() {
     if (window.ethereum) {
-      const web3 = new Web3(window.ethereum);
       try {
-        await window.ethereum.enable();
-        const acc = await web3.eth.getAccounts();
-        store.dispatch(appSlice.actions.setWallet(new Wallet(acc[0])));
-        // const wallet = new Web3Wallet(acc[0]);
+        const address = await web3.getCurrentAddress();
+        store.dispatch(appSlice.actions.setWallet(new Wallet(address)));
+        navigate(PATH.DASHBOARD);
         // this.setWallet([wallet, window.ethereum]);
         // this.trackAccessWallet(WALLET_TYPES.WEB3_WALLET);
         // if (this.path !== "") {

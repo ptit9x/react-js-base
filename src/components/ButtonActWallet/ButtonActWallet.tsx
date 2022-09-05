@@ -41,6 +41,7 @@ const ButtonActWallet = ({
 }: ButtonActWalletProps) => {
   const [changeLayout, setChangeLayout] = useState(false);
   const sizes = useWindowSize();
+
   function handleChangeInnerSize() {
     if (sizes[0] < BREAK_POINT_LAYOUT) {
       setChangeLayout(true);
