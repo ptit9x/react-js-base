@@ -1,4 +1,4 @@
-import { Grid, Typography, Link, Box } from "@mui/material";
+import { Grid, Typography, Link, Box, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ButtonActWalletProps } from "../../components/ButtonActWallet/ButtonActWallet";
 import ButtonActWallet from "../../components/ButtonActWallet/ButtonActWallet";
@@ -9,6 +9,7 @@ import { PATH } from "../../constants/paths";
 import useWeb3 from "../../hooks/useWeb3";
 
 const AccessWallet = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const web3 = useWeb3();
 
@@ -71,7 +72,7 @@ const AccessWallet = () => {
             variant="h3"
             gutterBottom
             align="center"
-            fontWeight={600}
+            fontWeight={theme.typography.fontWeightBold}
             fontSize="2.285rem"
           >
             Access My Wallet
@@ -85,9 +86,9 @@ const AccessWallet = () => {
             align="center"
             fontSize={"1.143rem"}
           >
-            Don't have a wallet?{" "}
+            Don't have a wallet?
             <Link
-              style={{ color: "#fff" }}
+              style={{ color: theme.palette.common.white }}
               href={PATH.CREATE_WALLET}
               underline="always"
             >

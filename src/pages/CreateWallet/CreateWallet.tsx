@@ -1,8 +1,10 @@
-import { Grid, Typography, Link, Box } from "@mui/material";
+import { Grid, Typography, Link, Box, useTheme } from "@mui/material";
 import AccessWalletItem from "../../components/ButtonActWallet/ButtonActWallet";
 import { ButtonActWalletProps } from "../../components/ButtonActWallet/ButtonActWallet";
 import { PATH } from "../../constants/paths";
 const CreateWallet = () => {
+  const theme = useTheme();
+
   async function openWeb3Wallet() {
     // eslint-disable-next-line no-console
     console.log("click");
@@ -36,16 +38,21 @@ const CreateWallet = () => {
         align-items="center"
       >
         <Grid item xs={12}>
-          <Typography variant="h3" gutterBottom align="center" fontWeight={600}>
+          <Typography
+            variant="h3"
+            gutterBottom
+            align="center"
+            fontWeight={theme.typography.fontWeightBold}
+          >
             Create a new wallet
           </Typography>
           <Typography variant="body1" align="center">
             Please select a method to create a new wallet
           </Typography>
           <Typography variant="body1" gutterBottom align="center">
-            Already have a wallet?{" "}
+            Already have a wallet?
             <Link
-              style={{ color: "#fff" }}
+              style={{ color: theme.palette.common.white }}
               href={PATH.ACCESS_WALLET}
               underline="always"
             >
