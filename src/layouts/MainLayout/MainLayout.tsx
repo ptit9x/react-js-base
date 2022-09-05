@@ -10,8 +10,8 @@ const MainLayout = () => {
     <Box display="flex" sx={{ backgroundColor: "background.paper" }}>
       <Sidebar />
       <Container>
-        <Navbar />
         <Content>
+          <Navbar />
           <Outlet />
         </Content>
         <Footer />
