@@ -2,8 +2,7 @@ import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 
 import { PATH } from "./constants/paths";
-import AuthenticatedGuard from "./guards/AuthenticatedGuard";
-// import PublicGuard from "./guards/PublicGuard";
+const AuthenticatedGuard = lazy(() => import("./guards/AuthenticatedGuard"));
 const MainLayout = lazy(() => import("./layouts/MainLayout/MainLayout"));
 const GuestLayout = lazy(() => import("./layouts/GuestLayout/GuestLayout"));
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
