@@ -1,13 +1,9 @@
 import styled from "@emotion/styled";
 import { Box } from "@mui/material";
 
-export const Container = styled(Box)`
-  flex-grow: 1;
-  height: 100vh;
-  overflow: auto;
+export const Wrapper = styled(Box)`
   display: flex;
-  flex-direction: column;
-  margin: 0 ${({ theme }) => theme.spacing(1.5)};
+  overflow: auto;
   background-color: ${({ theme }) => theme.palette.background.paper};
 
   ::-webkit-scrollbar {
@@ -25,6 +21,15 @@ export const Container = styled(Box)`
     background: ${({ theme }) => theme.palette.white[200]};
     border-radius: 50px;
   }
+`;
+
+export const Container = styled(Box)`
+  flex-grow: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 ${({ theme }) => theme.spacing(1.5)};
+  background-color: ${({ theme }) => theme.palette.background.paper};
 `;
 
 export const Content = styled(Box)`
