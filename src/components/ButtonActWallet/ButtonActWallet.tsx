@@ -23,15 +23,6 @@ const ImgStyled = styled.img`
   src: ${props => props.src};
 `;
 
-const ButtonStyled = styled(Button)`
-  text-transform: "none";
-  max-width: "600px";
-  margin: "16px";
-  color: "#000";
-  background-color: "#fff";
-  padding: "40px 20px 40px 40px";
-`;
-
 const ButtonActWallet = ({
   srcIcon,
   title,
@@ -58,7 +49,7 @@ const ButtonActWallet = ({
   }, [sizes[0]]);
 
   return (
-    <ButtonStyled
+    <Button
       variant="contained"
       sx={theme => ({
         textTransform: "none",
@@ -122,7 +113,7 @@ const ButtonActWallet = ({
           />
         </Grid>
       ) : null}
-    </ButtonStyled>
+    </Button>
   );
 };
 export default ButtonActWallet;
