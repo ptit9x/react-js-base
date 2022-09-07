@@ -1,12 +1,13 @@
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Box, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { useTranslation } from "react-i18next";
 import { ButtonCusTom } from "src/assets/common.styled";
-import icon_open_sidebar from "src/assets/icons/icon-open-sidebar.svg";
+import { ReactComponent as MenuIcon } from "src/assets/icons/icon-open-sidebar.svg";
 import { BREAKPOINT } from "src/constants/styles";
 import { useAppDispatch } from "src/store";
 import theme from "src/theme";
+
 import { onOpenSidebar } from "../MainLayout.reducer";
 import { OpenSidebarButton } from "./Navbar.styled";
 
@@ -22,6 +23,12 @@ const Navbar = () => {
     >
       <Grid2 xs={12} md={8}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <OpenSidebarButton
+            onClick={() => dispatch(onOpenSidebar())}
+            BREAKPOINT={BREAKPOINT.XL}
+          >
+            <MenuIcon fill={theme.palette.blue[500]} width={40} height={40} />
+          </OpenSidebarButton>
           <Box>
             <Typography fontWeight={theme.typography.fontWeightBold}>
               {t("you-can-now-buy-crypto")}
@@ -36,12 +43,6 @@ const Navbar = () => {
           </Box>
           <ButtonCusTom>{t("buy-crypto-now")}</ButtonCusTom>
         </Box>
-        <OpenSidebarButton
-          onClick={() => dispatch(onOpenSidebar())}
-          BREAKPOINT={BREAKPOINT.XL}
-        >
-          <img src={icon_open_sidebar} alt="open-sidebar" width="40px" />
-        </OpenSidebarButton>
       </Grid2>
       <Grid2
         xs={12}
@@ -49,7 +50,7 @@ const Navbar = () => {
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          alignSelf: "center",
+          alignSelf: "center"
         }}
       >
         <NotificationsNoneIcon></NotificationsNoneIcon>
