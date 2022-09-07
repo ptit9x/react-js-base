@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { PATH } from "../constants/paths";
-import { getToken } from "../utils/auth";
+import { useAppSelector } from "../store";
 
 interface Props {
   children: ReactNode;
@@ -9,12 +9,12 @@ interface Props {
 
 const AuthenticatedGuard = ({ children }: Props) => {
   const location = useLocation();
-
-  // return getToken() ? (
-  //   <>{children}</>
-  // ) : (
-  //   <Navigate to={PATH.LOGIN} replace state={{ from: location }} />
-  // );
+  const wallet = useAppSelector(state => state.app.wallet);
+  return wallet.getAddress() ? (
+    <>{children}</>
+  ) : (
+    <Navigate to={PATH.ACCESS_WALLET} replace state={{ from: location }} />
+  );
 };
 
 export default AuthenticatedGuard;

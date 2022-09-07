@@ -1,5 +1,7 @@
 export const PATH = {
   HOME: "/",
+  LOGIN: "/login",
+  WALLET: "/wallet",
   DASHBOARD: "/wallet/dashboard",
   NFT: "/wallet/nft",
   DAPPS: "/wallet/dapps",

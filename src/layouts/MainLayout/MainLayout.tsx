@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
 import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";
 import Sidebar from "./Sidebar/Sidebar";
@@ -11,7 +12,9 @@ const MainLayout = () => {
       <Container>
         <Content>
           <Navbar />
-          <Outlet />
+          <Suspense fallback={<div />}>
+            <Outlet />
+          </Suspense>
         </Content>
         <Footer />
       </Container>

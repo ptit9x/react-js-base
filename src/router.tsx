@@ -1,40 +1,46 @@
+import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
+
 import { PATH } from "./constants/paths";
-import MainLayout from "./layouts/MainLayout/MainLayout";
-import AccessWallet from "./pages/AccessWallet/AccessWallet";
-import CreateWallet from "./pages/CreateWallet/CreateWallet";
-import DApps from "./pages/DApps/DApps";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import DeployContract from "./pages/DeployContract/DeployContract";
-import InteractContract from "./pages/InteractContract/InteractContract";
-import NFT from "./pages/NFT/NFT";
-import SendToken from "./pages/SendToken/SendToken";
-import SwapToken from "./pages/SwapToken/SwapToken";
+const AuthenticatedGuard = lazy(() => import("./guards/AuthenticatedGuard"));
+const MainLayout = lazy(() => import("./layouts/MainLayout/MainLayout"));
+const GuestLayout = lazy(() => import("./layouts/GuestLayout/GuestLayout"));
+const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"));
+const AccessWallet = lazy(() => import("./pages/AccessWallet/AccessWallet"));
+const CreateWallet = lazy(() => import("./pages/CreateWallet/CreateWallet"));
+const DApps = lazy(() => import("./pages/DApps/DApps"));
+const NFT = lazy(() => import("./pages/NFT/NFT"));
+const SendToken = lazy(() => import("./pages/SendToken/SendToken"));
+const SwapToken = lazy(() => import("./pages/SwapToken/SwapToken"));
+const DeployContract = lazy(
+  () => import("./pages/DeployContract/DeployContract")
+);
+const InteractContract = lazy(
+  () => import("./pages/InteractContract/InteractContract")
+);
 
 const RouterConfig = () => {
   const createRoutes = useRoutes([
     {
-      path: PATH.ACCESS_WALLET,
-      element: (
-        // <PublicGuard>
-        <AccessWallet />
-        // </PublicGuard>
-      )
-    },
-    {
-      path: PATH.CREATE_WALLET,
-      element: (
-        // <PublicGuard>
-        <CreateWallet />
-        // </PublicGuard>
-      )
+      path: PATH.WALLET,
+      element: <GuestLayout />,
+      children: [
+        {
+          path: PATH.ACCESS_WALLET,
+          element: <AccessWallet />
+        },
+        {
+          path: PATH.CREATE_WALLET,
+          element: <CreateWallet />
+        }
+      ]
     },
     {
       path: PATH.HOME,
       element: (
-        // <AuthenticatedGuard>
-        <MainLayout />
-        //  </AuthenticatedGuard>
+        <AuthenticatedGuard>
+          <MainLayout />
+        </AuthenticatedGuard>
       ),
       children: [
         {
