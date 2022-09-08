@@ -2,14 +2,19 @@ import styled from "@emotion/styled";
 import { Box, Button, Typography, Tooltip, IconButton } from "@mui/material";
 import { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 
-export const Wrapper = styled(Box)`
+interface CustomTooltipProps {
+  maxwidth?: string;
+  padding?: string;
+}
+
+export const Wrapper = styled(Box)<{ width?: string; height?: string }>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
 
-  width: ${({ theme }) => theme.spacing(32.5)};
-  height: ${({ theme }) => theme.spacing(22.5)};
+  width: ${({ theme, width }) => width ?? theme.spacing(32.5)};
+  height: ${({ theme, height }) => height ?? theme.spacing(22.5)};
   background: url("https://mewcard.mewapi.io/?address=0xd9e49813b2d97c2e4b9bbb333c65961720b46cdc")
     no-repeat center center/cover;
   border-radius: 16px;
@@ -56,16 +61,18 @@ export const UtilButton = styled(IconButton)`
   }
 `;
 
-export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
+export const LightTooltip = styled(
+  ({ className, ...props }: TooltipProps & CustomTooltipProps) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  )
+)(({ theme, maxwidth, padding }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: theme.palette.common.white,
     color: theme.palette.text.primary,
     boxShadow: theme.shadows[1],
-    maxWidth: "none",
+    maxWidth: maxwidth ?? "none",
     fontSize: theme.spacing(1.75),
-    padding: theme.spacing(1.25)
+    padding: padding ?? theme.spacing(1.75)
   },
   [`& .${tooltipClasses.arrow}`]: {
     color: theme.palette.common.white

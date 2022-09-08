@@ -36,7 +36,8 @@ const theme = createTheme({
       800: "#0b2840",
       900: "#1f1f22",
       A100: "#5e6b8d",
-      A200: "#f8f9fb"
+      A200: "#f8f9fb",
+      A400: "#96a8b6"
     },
     green: {
       100: "#275342",
@@ -106,7 +107,7 @@ export type CustomizedTheme = typeof theme;
 
 declare module "@emotion/react" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface Theme extends CustomizedTheme { }
+  export interface Theme extends CustomizedTheme {}
 }
 
 export default theme;

@@ -13,6 +13,7 @@ import {
 import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
+import { walletAddress } from "src/layouts/MainLayout/Sidebar/AccountCard/AccountCard";
 import SendAccordion from "src/pages/SendToken/SendAccordion";
 import theme from "src/theme";
 
@@ -29,8 +30,6 @@ interface SendTokenProps {
   gasLimit?: number;
   addData?: string;
 }
-
-const walletAddress = "0xd9e49813B2d97C2E4B9bbB333C65961720B46CDc";
 
 const SendToken = ({
   token,
