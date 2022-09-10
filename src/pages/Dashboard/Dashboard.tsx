@@ -1,14 +1,14 @@
 import React from "react";
-import { ItemPaper } from "src/assets/common.styled";
 import DashBoardIntroduce from "src/components/DashBoardIntroduce/DashBoardIntroduce";
-import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
+import Swap from "src/components/Swap/Swap";
+import ContentLayout from "src/layouts/ContentLayout/ContentLayout";
 
 const DashboardPage = () => {
   return (
-    <DashBoardLayout
+    <ContentLayout
       main={<DashBoardIntroduce />}
-      sideRight={<ItemPaper></ItemPaper>}
-    ></DashBoardLayout>
+      sideRight={<Swap></Swap>}
+    ></ContentLayout>
   );
 };
 

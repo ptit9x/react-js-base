@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
+import Network from "src/components/Network/Network";
 import { ContentLayoutStyle } from "./ContentLayout.styled";
 interface ContentLayoutProps {
   main?: ReactNode;
@@ -15,7 +16,9 @@ const ContentLayout = ({
   return (
     <ContentLayoutStyle>
       <Box sx={{ gridArea: "main" }}>{main}</Box>
-      <Box sx={{ gridArea: "network", bgcolor: "secondary.main" }}>NetWork</Box>
+      <Box sx={{ gridArea: "network" }}>
+        <Network />
+      </Box>
       {!disableSide && <Box sx={{ gridArea: "sidebar" }}>{sideRight}</Box>}
     </ContentLayoutStyle>
   );

@@ -1,7 +1,10 @@
+import { Link, Stack, Typography } from "@mui/material";
 import React from "react";
-import { Typography, Stack, Link } from "@mui/material";
-import SwapItem from "./SwapItem";
 import { useTranslation } from "react-i18next";
+import { ItemPaper } from "src/assets/common.styled";
+import theme from "src/theme";
+
+import SwapItem from "./SwapItem";
 
 const swapListItem = [
   {
@@ -33,19 +36,19 @@ const swapListItem = [
 const Swap = () => {
   const { t } = useTranslation();
   return (
-    <Box p="20px" borderRadius="10px" style={{ background: "#fff" }} mt="20px">
+    <ItemPaper padd={theme.spacing(2.25)}>
       <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-        mb="30px"
+        mb={3.75}
       >
-        <Typography variant="h6" fontWeight="bold" mb="10px">
-          {t("swapComponent.swap")}
+        <Typography variant="h6" fontWeight="bold">
+          {t("swap")}
         </Typography>
 
-        <Link href="#" underline="none">
-          {t("swapComponent.more")}...
+        <Link href="#" fontSize="14px" underline="none">
+          {t("more")}...
         </Link>
       </Stack>
       <div>
@@ -53,7 +56,7 @@ const Swap = () => {
           <SwapItem key={index} label={item.label} image={item.image} />
         ))}
       </div>
-    </Box>
+    </ItemPaper>
   );
 };
 

@@ -15,8 +15,8 @@ const MainLayout = () => {
           <Suspense fallback={<div />}>
             <Outlet />
           </Suspense>
+          <Footer />
         </Content>
-        <Footer />
       </Container>
     </Wrapper>
   );

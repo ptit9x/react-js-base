@@ -1,19 +1,22 @@
-import React from "react";
-import { Box, Typography, Grid, Autocomplete, TextField } from "@mui/material";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Stack } from "@mui/system";
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import {
-  ButtonClear,
-  ButtonDisable,
-  FeeTypo,
-  ItemPaper,
-  PrimaryTypo,
-} from "./SendToken.styled";
-import SendAccordion from "src/components/SendAccordion/SendAccordion";
+  Autocomplete,
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography
+} from "@mui/material";
+import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
+import { ItemPaper } from "src/assets/common.styled";
+import SendAccordion from "src/pages/SendToken/SendAccordion";
+import theme from "src/theme";
+
+import { ButtonClear, ButtonDisable, FeeTypo } from "./SendToken.styled";
 
 interface SendTokenProps {
   token?: string;
@@ -21,103 +24,119 @@ interface SendTokenProps {
   balance?: number;
   address?: string;
   fee?: number;
-  time?: string;
+  time?: number;
   total?: string;
   gasLimit?: number;
   addData?: string;
 }
 
+const walletAddress = "0xd9e49813B2d97C2E4B9bbB333C65961720B46CDc";
+
 const SendToken = ({
   token,
   amount,
-  balance,
+  balance = 0,
   address,
-  fee,
-  time,
+  fee = 0.47,
+  time = 15,
   total = "0.000318",
   gasLimit,
-  addData,
+  addData
 }: SendTokenProps) => {
   const { t } = useTranslation();
+
   return (
     <ItemPaper>
-      <h2>{t("sendPage.token")}</h2>
-      <PrimaryTypo variant="body2" textAlign="end">
-        {t("sendPage.balance")}: {balance}
-      </PrimaryTypo>
-      <Grid container spacing={2} mt="10px">
+      <Typography
+        component="h1"
+        fontWeight="bold"
+        fontSize={theme.spacing(2.5)}
+      >
+        {t("send")}
+      </Typography>
+      <Typography color="primary" variant="body2" textAlign="end">
+        {t("balance")}: {balance}
+      </Typography>
+
+      <Grid container spacing={2} mt={1.25}>
         <Grid item xs={6}>
           <Autocomplete
             disablePortal
-            id="combo-box-token"
             value={token}
-            options={[]}
-            sx={{ width: "100%", mb: "20px" }}
-            renderInput={(params) => (
-              <TextField {...params} label={t("sendPage.token")} />
-            )}
+            options={["ETH"]}
+            sx={{ width: "100%", mb: 2.5 }}
+            renderInput={params => <TextField {...params} label={t("token")} />}
           />
         </Grid>
         <Grid item xs={6}>
-          <Autocomplete
-            disablePortal
-            id="combo-box-amount"
-            options={[]}
+          <TextField
+            type="number"
             value={amount}
-            sx={{ width: "100%", mb: "20px" }}
-            renderInput={(params) => (
-              <TextField {...params} label={t("sendPage.amount")} />
-            )}
+            sx={{ width: "100%", mb: 2.5 }}
+            label={t("amount")}
           />
         </Grid>
       </Grid>
+
       <Box
-        p="20px"
-        mb="10px"
+        p={2.5}
+        my={2}
         borderRadius="10px"
-        sx={{ background: "#f8f9fb" }}
+        bgcolor={theme.palette.blueGrey.A200}
       >
-        <Typography
-          variant="body2"
-          fontWeight="bold"
-          alignItems="center"
-          display="flex"
-        >
-          <ErrorOutlineIcon />
-          <Box ml="10px">
-            <p>{t("sendPage.eth-balance-low")}</p>
+        <Box display="flex">
+          <ErrorOutlineIcon fontSize="small" />
+          <Box ml={0.5}>
+            <Typography fontWeight="bold" fontSize={theme.spacing(1.75)}>
+              {t("eth-balance-low")}
+            </Typography>
           </Box>
-        </Typography>
-        <Grid container spacing={2} mt="10px">
+        </Box>
+
+        <Grid container spacing={2} mt={0.5}>
           <Grid item xs={6}>
-            <Typography variant="body2" color="#5e6b8d">
-              {t("sendPage.describe-eth")}
+            <Typography variant="body2" color={theme.palette.blueGrey.A100}>
+              {t("describe-eth")}
             </Typography>
           </Grid>
-          <Grid item xs={6}>
-            <PrimaryTypo variant="body2" fontWeight="bold">
-              {t("sendPage.transfer-eth")}
-            </PrimaryTypo>
-            <PrimaryTypo variant="body2" fontWeight="bold">
-              {t("sendPage.buy-eth")}
-            </PrimaryTypo>
+          <Grid
+            item
+            xs={6}
+            display="flex"
+            flexDirection="column"
+            alignItems="flex-start"
+          >
+            <Button
+              variant="text"
+              sx={{ fontWeight: "bold", textTransform: "none" }}
+            >
+              {t("transfer-eth")}
+            </Button>
+            <Button
+              variant="text"
+              sx={{ fontWeight: "bold", textTransform: "none" }}
+            >
+              {t("buy-eth")}
+            </Button>
           </Grid>
         </Grid>
       </Box>
+
       <Autocomplete
         disablePortal
-        id="combo-box-address"
-        options={[]}
         value={address}
-        sx={{ width: "100%", m: "20px 0" }}
-        renderInput={(params) => (
-          <TextField {...params} label={t("sendPage.to-address")} />
+        options={[walletAddress]}
+        sx={{ width: "100%", my: 3 }}
+        renderInput={params => (
+          <TextField {...params} label={t("to-address")} />
         )}
       />
-      <Box>
-        <Typography variant="body1" fontWeight="bold" mb="20px">
-          {t("sendPage.fee")}
+
+      <Box mt={4} mb={2}>
+        <Typography variant="body1" fontWeight="bold" mb={1} ml={2}>
+          {t("fee")}
         </Typography>
+
         <Stack
           direction="row"
           alignItems="center"
@@ -125,48 +144,76 @@ const SendToken = ({
         >
           <Stack direction="row" alignItems="center">
             <Box
-              p="10px"
-              mb="10px"
-              mr="10px"
-              borderRadius="10px"
-              style={{ background: "#f8f9fb" }}
+              p={0.75}
+              mb={1.25}
+              mr={1.25}
+              borderRadius="4px"
+              bgcolor="rgba(0,0,0,.12)"
               display="flex"
               alignItems="center"
             >
-              <FeeTypo>{fee} $</FeeTypo>
+              <FeeTypo sx={{ ml: 2 }}>${fee}</FeeTypo>
               <ArrowForwardIcon
-                style={{ margin: "0 10px", color: "#5e6b8d", padding: "2px" }}
+                htmlColor={theme.palette.blueGrey[500]}
+                sx={{
+                  width: theme.spacing(2.5),
+                  mx: 1.25
+                }}
               />
-              <QueryBuilderIcon style={{ color: "#5e6b8d", padding: "2px" }} />
+              <QueryBuilderIcon
+                htmlColor={theme.palette.blueGrey[500]}
+                sx={{
+                  width: theme.spacing(2.5),
+                  mr: 0.25
+                }}
+              />
               <FeeTypo>{time} min</FeeTypo>
               <KeyboardArrowDownIcon
-                style={{ margin: "0 10px", color: "#5e6b8d", padding: "2px" }}
+                htmlColor={theme.palette.blueGrey[500]}
+                sx={{
+                  width: theme.spacing(2.5),
+                  mx: 1.25
+                }}
               />
             </Box>
-            <FeeTypo>{total} ETH</FeeTypo>
+            <FeeTypo sx={{ mb: 1.25 }}>{total} ETH</FeeTypo>
           </Stack>
-          <Typography variant="body1" color="#5e6b8d">
-            {t("sendPage.total")}: {total} ETH
+
+          <Typography
+            color={theme.palette.blueGrey.A100}
+            sx={{ mb: theme.spacing(1.25) }}
+            fontSize={theme.spacing(1.75)}
+          >
+            {t("total")}: {total} ETH
           </Typography>
         </Stack>
+
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
         >
           <Stack direction="row" alignItems="center">
-            <FeeTypo>{t("sendPage.not-enough-eth")} </FeeTypo>
-            <PrimaryTypo>{t("sendPage.buy-more-eth")}</PrimaryTypo>
+            <FeeTypo>{t("not-enough-eth")} </FeeTypo>
+            <Button variant="text" sx={{ textTransform: "none" }}>
+              {t("buy-more-eth")}
+            </Button>
           </Stack>
-          <FeeTypo>{t("sendPage.fees-determined")}</FeeTypo>
+          <Button
+            variant="text"
+            sx={{ textTransform: "none", marginRight: theme.spacing(-1) }}
+          >
+            {t("fees-determined")}
+          </Button>
         </Stack>
       </Box>
-      <Box paddingY="20px">
+
+      <Box py={2.5}>
         <SendAccordion gasLimit={gasLimit} addData={addData} />
       </Box>
 
-      <ButtonDisable disabled>{t("sendPage.next")}</ButtonDisable>
-      <ButtonClear>{t("sendPage.clear-all")}</ButtonClear>
+      <ButtonDisable disabled>{t("next")}</ButtonDisable>
+      <ButtonClear>{t("clear-all")}</ButtonClear>
     </ItemPaper>
   );
 };

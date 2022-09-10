@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Button, Paper } from "@mui/material";
-
 interface ButtonProps {
   padd?: string;
   backgroundColor?: string;
@@ -11,8 +10,8 @@ interface ItemPaperProps {
   variant?: string;
 }
 
-export const ItemPaper = styled(Paper)`
-  padding: 2rem 3rem;
+export const ItemPaper = styled(Paper)<ItemPaperProps>`
+  padding: ${({ padd }) => padd ?? "2rem 3rem"};
   border-radius: 0.7rem;
   //margin-bottom: ${({ theme }) => theme.spacing(3)};
   background-color: ${({ theme }) => theme.palette.common.white};
@@ -22,17 +21,16 @@ export const ItemPaper = styled(Paper)`
   }
 `;
 
-export const ButtonCusTom = styled(Button)`
+export const ButtonCusTom = styled(Button)<ButtonProps>`
   border-radius: 0.7rem;
-
-  color: ${({ colorButton = "#fff" }: ButtonProps) => colorButton};
-  padding: ${({ padd = "0.7rem" }: ButtonProps) => padd};
-  background-color: ${({ backgroundColor = "#05c0a5" }: ButtonProps) =>
-    backgroundColor};
+  color: ${({ colorButton = "#fff" }) => colorButton};
+  padding: ${({ padd = "0.7rem" }) => padd};
+  background-color: ${({ backgroundColor, theme }) =>
+    backgroundColor ?? theme.palette.primary.main};
 
   :hover {
-    background-color: ${({ backgroundColor = "#05c0a5" }: ButtonProps) =>
-      backgroundColor};
+    background-color: ${({ backgroundColor, theme }) =>
+      backgroundColor ?? theme.palette.primary.main};
   }
   text-transform: none;
 `;
