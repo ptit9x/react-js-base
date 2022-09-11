@@ -10,7 +10,7 @@ const AccessWallet = lazy(() => import("./pages/AccessWallet/AccessWallet"));
 const CreateWallet = lazy(() => import("./pages/CreateWallet/CreateWallet"));
 const DApps = lazy(() => import("./pages/DApps/DApps"));
 const NFT = lazy(() => import("./pages/NFT/NFT"));
-const SendToken = lazy(() => import("./pages/SendToken/SendToken"));
+const SendToken = lazy(() => import("./pages/SendToken"));
 const SwapToken = lazy(() => import("./pages/SwapToken/SwapToken"));
 const DeployContract = lazy(
   () => import("./pages/DeployContract/DeployContract")
