@@ -19,7 +19,7 @@ const DashBoardIntroduce = () => {
           color={theme.palette.text.secondary}
           sx={{
             mt: 3,
-            fontStyle: "italic",
+            fontStyle: "italic"
           }}
           className="text-alight"
         >
@@ -27,14 +27,18 @@ const DashBoardIntroduce = () => {
         </Typography>
       </ItemPaper>
 
-      <Table elevation={2} square>
+      <Table
+        elevation={2}
+        square
+        sx={{
+          mt: 2.5
+        }}
+      >
         <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "0rem 1rem",
-            alignItems: "center",
-          }}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          p="0rem 1rem"
         >
           <h3>{t("my-token-value")}</h3>
           <Typography>{t("+custom")}</Typography>
