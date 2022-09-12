@@ -7,6 +7,9 @@ import { useAppDispatch } from "src/store";
 import { ActionButton, VerticalDivider, Wrapper } from "./ActionButtons.styled";
 import { actionButtons } from "src/constants/sidebarMenu";
 import theme from "src/theme";
+import { useState } from "react";
+import Modal from "src/components/Modal/Modal";
+import BuySellModalContent from "./BuySellModalContent/BuySellModalContent";
 
 const ActionButtons = () => {
   const { t } = useTranslation();
@@ -14,10 +17,16 @@ const ActionButtons = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
 
+  const [shouldModalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
   const handleActionButtonClick = (link: string) => {
     if (link) {
       navigate(link);
       dispatch(onCloseSidebar());
+    } else {
+      handleModalOpen();
     }
   };
 
@@ -41,6 +50,14 @@ const ActionButtons = () => {
           {i !== actionButtons.length - 1 && <VerticalDivider />}
         </ActionButton>
       ))}
+
+      <Modal
+        shouldModalOpen={shouldModalOpen}
+        handleModalClose={handleModalClose}
+        modalWidth={theme.spacing(67.5)}
+      >
+        <BuySellModalContent />
+      </Modal>
     </Wrapper>
   );
 };

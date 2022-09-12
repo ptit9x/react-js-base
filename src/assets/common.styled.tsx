@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { Button, Paper } from "@mui/material";
-interface ButtonProps {
+import { Button, ButtonProps, Paper } from "@mui/material";
+interface ButtonCusTomProps {
   padd?: string;
   backgroundColor?: string;
   colorButton?: string;
@@ -21,16 +21,22 @@ export const ItemPaper = styled(Paper)<ItemPaperProps>`
   }
 `;
 
-export const ButtonCusTom = styled(Button)<ButtonProps>`
+export const ButtonCusTom = styled(
+  ({
+    padd,
+    colorButton,
+    backgroundColor,
+    ...props
+  }: ButtonProps & ButtonCusTomProps) => <Button {...props} />
+)`
   border-radius: 0.7rem;
-  color: ${({ colorButton = "#fff" }) => colorButton};
+  text-transform: none;
+  color: ${({ colorButton = "#fff" }) => colorButton} !important;
   padding: ${({ padd = "0.7rem" }) => padd};
   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor ?? theme.palette.primary.main};
 
   :hover {
-    background-color: ${({ backgroundColor, theme }) =>
-      backgroundColor ?? theme.palette.primary.main};
+    background-color: ${({ theme }) => theme.palette.primary.light};
   }
-  text-transform: none;
 `;

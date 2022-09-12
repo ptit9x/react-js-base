@@ -1,7 +1,7 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 import { useLayoutEffect, useState } from "react";
-import icon_logo from "src/assets/icons/logo-mew.svg";
+import LOGO_ICON from "src/assets/icons/logo-mew.svg";
 import { menuItems } from "src/constants/sidebarMenu";
 import { BREAKPOINT } from "src/constants/styles";
 import { usePrevious } from "src/hooks/usePrevious";
@@ -49,7 +49,7 @@ const Sidebar = () => {
     >
       <AccountInfo>
         <LogoWrapper>
-          <img src={icon_logo} alt="sidebar-logo" width="120px" />
+          <img src={LOGO_ICON} alt="sidebar-logo" width="120px" />
           {drawerVariant === Variant.Temporary && (
             <IconButton onClick={() => dispatch(onCloseSidebar())}>
               <CloseIcon htmlColor={theme.palette.common.white} />

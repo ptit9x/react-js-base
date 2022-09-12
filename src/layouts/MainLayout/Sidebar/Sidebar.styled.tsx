@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 import {
+  ListItemButtonProps as MuiListItemButtonProps,
   ListItemButton as MuiListItemButton,
   Drawer as MuiDrawer,
   List as MuiList,
   Box
 } from "@mui/material";
 
-interface SidebarStyledProps {
+interface ListItemButtonProps {
   isActive?: boolean;
 }
 
@@ -64,9 +65,11 @@ export const LogoWrapper = styled(Box)`
   justify-content: space-between;
 `;
 
-export const ListItemButton = styled(({ isActive, ...props }) => (
-  <MuiListItemButton {...props} />
-))<SidebarStyledProps>`
+export const ListItemButton = styled(
+  ({ isActive, ...props }: ListItemButtonProps & MuiListItemButtonProps) => (
+    <MuiListItemButton {...props} />
+  )
+)`
   transition: none;
   opacity: ${({ isActive }) => (isActive ? 1 : 0.7)};
   background-color: ${({ isActive }) =>

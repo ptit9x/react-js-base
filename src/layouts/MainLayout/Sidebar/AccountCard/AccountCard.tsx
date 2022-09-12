@@ -10,6 +10,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { walletAddress } from "src/constants";
+import Modal from "src/components/Modal/Modal";
 import theme from "src/theme";
 
 import {
@@ -19,13 +21,16 @@ import {
   UtilButton,
   Wrapper
 } from "./AccountCard.styled";
-
-const walletAddress = "0xd9e49813B2d97C2E4B9bbB333C65961720B46CDc";
+import QRModalContent from "./QRModalContent";
 
 const AccountCard = () => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const accountMenuOpen = Boolean(anchorEl);
+
+  const [shouldModalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   const shortenAddress = (address: string) =>
     `${address.slice(0, 6)}...${address.slice(address.length - 4)}`;
@@ -51,7 +56,7 @@ const AccountCard = () => {
           {t("my-personal-account")}
         </AccountOptionsButton>
 
-        <Tooltip title={walletAddress} arrow placement="top">
+        <Tooltip title={walletAddress} placement="top">
           <Typography
             fontSize={theme.spacing(1.25)}
             color={theme.palette.common.white}
@@ -103,7 +108,7 @@ const AccountCard = () => {
           0 ETH
         </Typography>
         <Box>
-          <UtilButton>
+          <UtilButton onClick={handleModalOpen}>
             <QrCode2Icon fontSize="small" htmlColor={theme.palette.gray[800]} />
           </UtilButton>
           <UtilButton>
@@ -114,6 +119,13 @@ const AccountCard = () => {
           </UtilButton>
         </Box>
       </Box>
+
+      <Modal
+        shouldModalOpen={shouldModalOpen}
+        handleModalClose={handleModalClose}
+      >
+        <QRModalContent />
+      </Modal>
     </Wrapper>
   );
 };
