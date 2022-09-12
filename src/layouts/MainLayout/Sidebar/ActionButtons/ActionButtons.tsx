@@ -8,8 +8,8 @@ import { ActionButton, VerticalDivider, Wrapper } from "./ActionButtons.styled";
 import { actionButtons } from "src/constants/sidebarMenu";
 import theme from "src/theme";
 import { useState } from "react";
-import Modal from "src/components/Modal";
-import BuySellModalContent from "./BuySellModalContent";
+import Modal from "src/components/Modal/Modal";
+import BuySellModalContent from "./BuySellModalContent/BuySellModalContent";
 
 const ActionButtons = () => {
   const { t } = useTranslation();

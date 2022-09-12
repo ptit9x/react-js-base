@@ -13,13 +13,14 @@ import {
 import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
-import { walletAddress } from "src/layouts/MainLayout/Sidebar/AccountCard/AccountCard";
+import { walletAddress } from "src/constants";
+import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
 import SendAccordion from "src/pages/SendToken/SendAccordion";
 import theme from "src/theme";
 
 import { ButtonClear, ButtonDisable, FeeTypo } from "./SendToken.styled";
 
-interface SendTokenProps {
+interface SendTokenPageProps {
   token?: string;
   amount?: number;
   balance?: number;
@@ -31,7 +32,7 @@ interface SendTokenProps {
   addData?: string;
 }
 
-const SendToken = ({
+const SendTokenPage = ({
   token,
   amount,
   balance = 0,
@@ -41,7 +42,7 @@ const SendToken = ({
   total = "0.000318",
   gasLimit,
   addData
-}: SendTokenProps) => {
+}: SendTokenPageProps) => {
   const { t } = useTranslation();
 
   return (
@@ -214,6 +215,16 @@ const SendToken = ({
       <ButtonDisable disabled>{t("next")}</ButtonDisable>
       <ButtonClear>{t("clear-all")}</ButtonClear>
     </ItemPaper>
+  );
+};
+
+const SendToken = () => {
+  return (
+    <DashBoardLayout
+      main={<SendTokenPage />}
+      sideRight={<ItemPaper></ItemPaper>}
+      disableSide
+    ></DashBoardLayout>
   );
 };
 

@@ -1,11 +1,11 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { Box, Button, Typography } from "@mui/material";
+import { Avatar, Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
-import avatar from "src/assets/images/avatar.png";
+import AVATAR from "src/assets/images/avatar.png";
 import theme from "src/theme";
 
-import { walletAddress } from "./AccountCard";
+import { walletAddress } from "src/constants";
 import { Wrapper as QRCodeWrapper } from "./AccountCard.styled";
 
 const QRModalContent = () => {
@@ -27,12 +27,7 @@ const QRModalContent = () => {
       </Typography>
 
       <Box display="flex" alignItems="center" mb={2}>
-        <img
-          src={avatar}
-          alt="my-acc"
-          width="22px"
-          style={{ borderRadius: "99px" }}
-        />
+        <Avatar src={AVATAR} alt="my-acc" sx={{ width: 22, height: 22 }} />
         <Typography
           fontSize={theme.spacing(1.75)}
           fontWeight={700}

@@ -11,10 +11,11 @@ interface SellTabPanelProps {
 
 const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
   const { t } = useTranslation();
-  const estimatedNetworkFee = 0.0001;
   const [cryptoUnit, setCryptoUnit] = useState(cryptocurrencyUnits[0]);
   const [amountToSell, setAmountToSell] = useState(0);
   const [helperText, setHelperText] = useState("");
+
+  const estimatedNetworkFee = 0.0001;
 
   useEffect(() => {
     if (amountToSell < 0) {
@@ -81,7 +82,7 @@ const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
 
       <ButtonCusTom
         fullWidth
-        sx={{ mt: 5 }}
+        sx={{ mt: 5, mb: 2 }}
         disabled={!!helperText}
         padd={theme.spacing(2.25)}
         backgroundColor={!!helperText ? theme.palette.gray[300] : undefined}

@@ -10,7 +10,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Modal from "src/components/Modal";
+import { walletAddress } from "src/constants";
+import Modal from "src/components/Modal/Modal";
 import theme from "src/theme";
 
 import {
@@ -21,8 +22,6 @@ import {
   Wrapper
 } from "./AccountCard.styled";
 import QRModalContent from "./QRModalContent";
-
-export const walletAddress = "0xd9e49813B2d97C2E4B9bbB333C65961720B46CDc";
 
 const AccountCard = () => {
   const { t } = useTranslation();

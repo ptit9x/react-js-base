@@ -121,7 +121,7 @@ const BuyTabPanel = () => {
         </Stack>
       </Box>
 
-      <ButtonCusTom fullWidth padd={theme.spacing(2.25)}>
+      <ButtonCusTom fullWidth padd={theme.spacing(2.25)} sx={{ mb: 2 }}>
         {t("buy-now")}
       </ButtonCusTom>
     </>

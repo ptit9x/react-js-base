@@ -37,7 +37,6 @@ export const ButtonCusTom = styled(
     backgroundColor ?? theme.palette.primary.main};
 
   :hover {
-    background-color: ${({ backgroundColor, theme }) =>
-      backgroundColor ?? theme.palette.primary.main};
+    background-color: ${({ theme }) => theme.palette.primary.light};
   }
 `;
