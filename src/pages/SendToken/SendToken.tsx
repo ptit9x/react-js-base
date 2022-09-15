@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
 import { walletAddress } from "src/constants";
 import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
+import MyTokenValue from "src/components/MyTokenValue/MyTokenValue";
 import SendAccordion from "src/pages/SendToken/SendAccordion";
 import theme from "src/theme";
 
@@ -33,7 +34,7 @@ interface SendTokenPageProps {
 }
 
 const SendTokenPage = ({
-  token,
+  token = "ETH",
   amount,
   balance = 0,
   address,
@@ -82,21 +83,24 @@ const SendTokenPage = ({
         p={2.5}
         my={2}
         borderRadius="10px"
-        bgcolor={theme.palette.blueGrey.A200}
+        display={balance === 0 ? "block" : "none"}
+        bgcolor={theme.palette.background.paper}
       >
         <Box display="flex">
           <ErrorOutlineIcon fontSize="small" />
-          <Box ml={0.5}>
-            <Typography fontWeight="bold" fontSize={theme.spacing(1.75)}>
-              {t("eth-balance-low")}
-            </Typography>
-          </Box>
+          <Typography
+            fontWeight="bold"
+            fontSize={theme.spacing(1.75)}
+            sx={{ ml: 0.5 }}
+          >
+            {t("low-token-balance", { token })}
+          </Typography>
         </Box>
 
         <Grid container spacing={2} mt={0.5}>
           <Grid item xs={6}>
             <Typography variant="body2" color={theme.palette.blueGrey.A100}>
-              {t("describe-eth")}
+              {t("low-balance-description", { token })}
             </Typography>
           </Grid>
           <Grid
@@ -218,14 +222,11 @@ const SendTokenPage = ({
   );
 };
 
-const SendToken = () => {
-  return (
-    <DashBoardLayout
-      main={<SendTokenPage />}
-      sideRight={<ItemPaper></ItemPaper>}
-      disableSide
-    ></DashBoardLayout>
-  );
-};
+const SendToken = () => (
+  <DashBoardLayout
+    main={<SendTokenPage />}
+    sideRight={<MyTokenValue />}
+  ></DashBoardLayout>
+);
 
 export default SendToken;

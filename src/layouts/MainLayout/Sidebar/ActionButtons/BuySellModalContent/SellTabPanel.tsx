@@ -23,7 +23,7 @@ const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
     } else if (!amountToSell) {
       setHelperText(t("amount-required"));
     } else if (amountToSell > balance) {
-      setHelperText(t("you-do-not-have-enough-eth", { cryptoUnit }));
+      setHelperText(t("you-do-not-have-enough-to-sell", { cryptoUnit }));
     } else {
       setHelperText("");
     }

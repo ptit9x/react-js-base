@@ -32,8 +32,8 @@
   "token": "Token",
   "amount": "Amount",
   "balance": "Balance",
-  "eth-balance-low": "Your ETH balance is too low",
-  "describe-eth": "Every transaction requires a small amount of ETH to execute. Even if you have tokens to swap, when your ETH balance is close to zero, you won't be able to send anything until you fund your account.",
+  "low-token-balance": "Your {{token}} balance is too low",
+  "low-balance-description": "Every transaction requires a small amount of {{token}} to execute. Even if you have tokens to swap, when your {{token}} balance is close to zero, you won't be able to send anything until you fund your account.",
   "transfer-eth": "Transfer ETH from another account",
   "buy-eth": "Buy ETH",
   "to-address": "To address",
@@ -69,8 +69,11 @@
   "currency": "Currency",
   "amount-required": "Amount required",
   "amount-cant-be-neg": "Amount can't be negative",
-  "you-do-not-have-enough-eth": "You do not have enough {{cryptoUnit}} to sell",
+  "you-do-not-have-enough-to-sell": "You do not have enough {{cryptoUnit}} to sell",
+  "you-do-not-have-enough-to-swap": "You do not have enough {{tokenToSwapFrom}} to swap",
   "buy": "Buy",
+  "buy-token": "Buy {{token}}",
   "sell": "Sell",
+  "buy-more": "Buy more",
   "buy-fee-explanation": "Includes {{buyFee}}% fee (${{minBuyFee}} min) <br /> <br /> ETH network fee (for transfers to your wallet) ~${{ethNetworkFee}} <br /> <br /> Daily limit: ${{dailyLimit}} <br /> Monthly limit: ${{monthlyLimit}}"
 }
