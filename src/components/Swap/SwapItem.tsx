@@ -9,12 +9,7 @@ interface SwapItemProps {
 
 const SwapItem = ({ label, image }: SwapItemProps) => {
   return (
-    <Box
-      p={1.25}
-      mb={1.25}
-      borderRadius="10px"
-      bgcolor={theme.palette.background.paper}
-    >
+    <Box p={1.25} mb={1.25} borderRadius="10px" bgcolor="background.paper">
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography fontSize={theme.spacing(1.75)}>1 ETH / {label}</Typography>
         <Stack direction="row">

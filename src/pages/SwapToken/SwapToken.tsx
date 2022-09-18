@@ -1,171 +1,203 @@
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
 import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
 import MyTokenValue from "src/components/MyTokenValue/MyTokenValue";
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
 import {
   Box,
   Stack,
   IconButton,
   TextField,
-  MenuItem,
   Typography,
   Button
 } from "@mui/material";
-import { cryptocurrencyUnits } from "src/constants/currencyUnits";
+import { tokenUnits } from "src/constants/currencyUnits";
 import theme from "src/theme";
 
 const SwapTokenPage = () => {
   const { t } = useTranslation();
-  const [tokenToSwapFrom, setTokenToSwapFrom] = useState(
-    cryptocurrencyUnits[0]
+  const [tokenToSwapFrom, setTokenToSwapFrom] = useState<Option | null>(
+    tokenUnits[0]
   );
-  const [tokenToSwapTo, setTokenToSwapTo] = useState(" ");
+  const [tokenToSwapTo, setTokenToSwapTo] = useState<Option | null>(null);
   const [amountToSwapFrom, setAmountToSwapFrom] = useState(0);
   const [amountToSwapTo, setAmountToSwapTo] = useState(0);
-  const [helperText, setHelperText] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const balance = 0;
 
   useEffect(() => {
     if (amountToSwapFrom < 0) {
-      setHelperText(t("amount-cant-be-neg"));
+      setErrorMessage(t("amount-cant-be-neg"));
     } else if (!amountToSwapFrom) {
-      setHelperText(t("amount-required"));
+      setErrorMessage(t("amount-required"));
     } else if (amountToSwapFrom > balance) {
-      setHelperText(t("you-do-not-have-enough-to-swap", { tokenToSwapFrom }));
+      setErrorMessage(
+        t("you-do-not-have-enough-to-swap", { token: tokenToSwapFrom?.label })
+      );
     } else {
-      setHelperText("");
+      setErrorMessage("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amountToSwapFrom, balance, tokenToSwapFrom]);
 
+  const handleTokenToSwapFromChange = (
+    _e: React.SyntheticEvent,
+    value: Option | null
+  ) => {
+    setTokenToSwapFrom(value);
+    if (value?.label === tokenToSwapTo?.label) {
+      setTokenToSwapTo(null);
+    }
+  };
+
+  const handleTokenToSwapToChange = (
+    _e: React.SyntheticEvent,
+    value: Option | null
+  ) => {
+    setTokenToSwapTo(value);
+  };
+
   return (
-    <ItemPaper>
+    <ItemPaper hasNarrowPaddOnSM>
       <Typography
         component="h1"
         fontWeight="bold"
         fontSize={theme.spacing(2.5)}
+        mb={2}
       >
         {t("swap")}
       </Typography>
 
       <ItemPaper
-        padd={theme.spacing(2.25)}
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
-          mt: 4
+          height: theme.spacing(30),
+          p: 2.25,
+          "@media screen and (max-width: 576px)": {
+            flexDirection: "column",
+            height: "fit-content",
+            alignItems: "center",
+            p: 1.5,
+            pb: 5
+          }
         }}
       >
-        <Stack direction="column" position="relative" top={theme.spacing(2.25)}>
-          <Box width={theme.spacing(28)}>
+        <Stack
+          direction="column"
+          width="100%"
+          maxWidth={theme.spacing(34)}
+          position="relative"
+          top={theme.spacing(1)}
+        >
+          <Box>
             <Typography color="primary" variant="body2" textAlign="end">
               {t("balance")}: {balance}
             </Typography>
-            <TextField
-              id="from-token"
-              select
-              label="From"
-              value={tokenToSwapFrom}
-              onChange={e => setTokenToSwapFrom(e.target.value)}
-              sx={{ width: theme.spacing(28) }}
-            >
-              {cryptocurrencyUnits.map(unit => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </TextField>
+            <Autocomplete
+              options={tokenUnits}
+              label={t("from")}
+              fullWidth
+              disableClearable
+              inputValue={tokenToSwapFrom}
+              onChange={handleTokenToSwapFromChange}
+            />
           </Box>
 
-          <Box width={theme.spacing(28)}>
+          <Box mt={3.5} mb={2.5}>
             <TextField
+              fullWidth
               type="number"
-              error={!!helperText}
-              helperText={helperText}
+              error={!!errorMessage}
               label={t("amount")}
               value={amountToSwapFrom}
               onChange={e => setAmountToSwapFrom(parseInt(e.target.value))}
-              sx={{ mt: 3.5, mb: 2.5 }}
             />
-            <Typography
-              display={!helperText ? "none" : "inline"}
-              color="primary"
-              fontSize={theme.spacing(1.5)}
-              sx={{
-                cursor: "pointer",
-                position: "absolute",
-                left: theme.spacing(1.75),
-                bottom: theme.spacing(1)
-              }}
-            >
-              {t("buy-more")}
-            </Typography>
+            {!!errorMessage && (
+              <Box
+                ml={1.5}
+                mt={0.5}
+                lineHeight="1px"
+                maxWidth={theme.spacing(28.5)}
+              >
+                <Typography
+                  color="error"
+                  display="inline"
+                  fontSize={theme.spacing(1.5)}
+                >
+                  {errorMessage}
+                </Typography>
+                <Typography
+                  color="primary"
+                  display="inline"
+                  fontSize={theme.spacing(1.5)}
+                  sx={{
+                    cursor: "pointer"
+                  }}
+                >
+                  {t("buy-more")}
+                </Typography>
+              </Box>
+            )}
           </Box>
         </Stack>
 
-        <IconButton>
+        <IconButton sx={{ alignSelf: "center" }}>
           <SwapHorizIcon htmlColor={theme.palette.gray[600]} />
         </IconButton>
 
-        <Stack direction="column">
+        <Stack
+          direction="column"
+          width="100%"
+          maxWidth={theme.spacing(34)}
+          position="relative"
+          top={theme.spacing(3.5)}
+        >
+          <Autocomplete
+            label={t("to")}
+            fullWidth
+            disableClearable
+            inputValue={tokenToSwapTo}
+            onChange={handleTokenToSwapToChange}
+            options={tokenUnits.filter(
+              ({ label }) => label !== tokenToSwapFrom?.label
+            )}
+          />
           <TextField
-            id="to-token"
-            select
-            label="To"
-            value={tokenToSwapTo}
-            onChange={e => setTokenToSwapTo(e.target.value)}
-            sx={{ mt: 3, width: theme.spacing(28) }}
-          >
-            <MenuItem disabled value=" ">
-              Select Token
-            </MenuItem>
-            {cryptocurrencyUnits.map(unit => (
-              <MenuItem key={unit} value={unit}>
-                {unit}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          <TextField
-            type="number"
-            value={amountToSwapTo}
-            sx={{ width: theme.spacing(28), mb: 2.5, mt: 3.5 }}
             label={t("amount")}
+            fullWidth
+            value={amountToSwapTo}
+            sx={{ mb: 2.5, mt: 3.5, pointerEvents: "none" }}
           />
         </Stack>
       </ItemPaper>
 
-      <Box
-        display={!!helperText ? "block" : "none"}
-        p={2.5}
-        my={2}
-        borderRadius="10px"
-        bgcolor={theme.palette.background.paper}
-      >
-        <Box display="flex" mb={1}>
-          <ErrorOutlineIcon fontSize="small" />
-          <Typography
-            fontWeight="bold"
-            fontSize={theme.spacing(1.75)}
-            sx={{ ml: 0.5 }}
-          >
-            {t("low-token-balance", { token: tokenToSwapFrom })}
+      {!!errorMessage && (
+        <Box p={2.5} my={2} borderRadius="10px" bgcolor="background.paper">
+          <Box display="flex" mb={1}>
+            <ErrorOutlineIcon fontSize="small" />
+            <Typography
+              fontWeight="bold"
+              fontSize={theme.spacing(1.75)}
+              sx={{ ml: 0.5 }}
+            >
+              {t("low-token-balance", { token: tokenToSwapFrom?.label })}
+            </Typography>
+          </Box>
+
+          <Typography variant="body2" color={theme.palette.blueGrey.A100}>
+            {t("low-balance-description", { token: tokenToSwapFrom?.label })}
           </Typography>
+
+          <Button variant="outlined" sx={{ mt: 1.5, textTransform: "none" }}>
+            {t("buy-token", { token: tokenToSwapFrom?.label })}
+          </Button>
         </Box>
-
-        <Typography variant="body2" color={theme.palette.blueGrey.A100}>
-          {t("low-balance-description", { token: tokenToSwapFrom })}
-        </Typography>
-
-        <Button variant="outlined" sx={{ mt: 1.5, textTransform: "none" }}>
-          {t("buy-token", { token: tokenToSwapFrom })}
-        </Button>
-      </Box>
+      )}
     </ItemPaper>
   );
 };

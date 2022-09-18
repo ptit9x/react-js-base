@@ -3,9 +3,13 @@ import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
 import theme from "src/theme";
 
-const MyTokenValue = () => {
+interface MyTokenValueProps {
+  balance?: number;
+  tokenIcon?: string;
+}
+
+const MyTokenValue = ({ tokenIcon, balance = 0.0 }: MyTokenValueProps) => {
   const { t } = useTranslation();
-  const balance = "0.00";
 
   return (
     <ItemPaper padd={theme.spacing(2.25)}>
@@ -19,8 +23,11 @@ const MyTokenValue = () => {
         </Typography>
 
         <img
-          src="https://img.mewapi.io/?image=https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880"
-          alt="eth-icon"
+          src={
+            tokenIcon ??
+            "https://img.mewapi.io/?image=https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880"
+          }
+          alt="token-icon"
           width="32px"
         />
       </Stack>

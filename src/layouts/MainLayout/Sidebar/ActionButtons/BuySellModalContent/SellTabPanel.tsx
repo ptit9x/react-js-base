@@ -1,8 +1,9 @@
-import { useTranslation } from "react-i18next";
-import { Box, MenuItem, Stack, TextField, Typography } from "@mui/material";
-import { cryptocurrencyUnits } from "src/constants/currencyUnits";
+import { Box, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ButtonCusTom } from "src/assets/common.styled";
+import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
+import { tokenUnits } from "src/constants/currencyUnits";
 import theme from "src/theme";
 
 interface SellTabPanelProps {
@@ -11,42 +12,47 @@ interface SellTabPanelProps {
 
 const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
   const { t } = useTranslation();
-  const [cryptoUnit, setCryptoUnit] = useState(cryptocurrencyUnits[0]);
+  const [currentToken, setCurrentToken] = useState<Option | null>(
+    tokenUnits[0]
+  );
   const [amountToSell, setAmountToSell] = useState(0);
-  const [helperText, setHelperText] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const estimatedNetworkFee = 0.0001;
 
   useEffect(() => {
     if (amountToSell < 0) {
-      setHelperText(t("amount-cant-be-neg"));
+      setErrorMessage(t("amount-cant-be-neg"));
     } else if (!amountToSell) {
-      setHelperText(t("amount-required"));
+      setErrorMessage(t("amount-required"));
     } else if (amountToSell > balance) {
-      setHelperText(t("you-do-not-have-enough-to-sell", { cryptoUnit }));
+      setErrorMessage(
+        t("you-do-not-have-enough-to-sell", { token: currentToken?.label })
+      );
     } else {
-      setHelperText("");
+      setErrorMessage("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amountToSell, balance, cryptoUnit]);
+  }, [amountToSell, balance, currentToken]);
+
+  const handleTokenChange = (
+    _e: React.SyntheticEvent,
+    value: Option | null
+  ) => {
+    setCurrentToken(value);
+  };
 
   return (
     <>
-      <TextField
-        id="select-currency"
+      <Autocomplete
         fullWidth
-        select
+        disableClearable
+        options={tokenUnits}
         label={t("currency")}
-        value={cryptoUnit}
-        onChange={e => setCryptoUnit(e.target.value)}
+        inputValue={currentToken}
+        onChange={handleTokenChange}
         sx={{ mb: 3, mt: 1 }}
-      >
-        {cryptocurrencyUnits.map(unit => (
-          <MenuItem key={unit} value={unit}>
-            {unit}
-          </MenuItem>
-        ))}
-      </TextField>
+      />
 
       <Box my={4}>
         <Typography color="primary" variant="body2" textAlign="end">
@@ -56,8 +62,8 @@ const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
           label={t("amount")}
           variant="outlined"
           type="number"
-          helperText={helperText}
-          error={!!helperText}
+          helperText={errorMessage}
+          error={!!errorMessage}
           fullWidth
           value={amountToSell}
           onChange={e => setAmountToSell(parseInt(e.target.value))}
@@ -77,15 +83,15 @@ const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
         fontSize={theme.spacing(1.75)}
         color={theme.palette.blueGrey[600]}
       >
-        {t("after-submitting-sell-order")}
+        {t("after-submitting-sell-order", { token: currentToken?.label })}
       </Typography>
 
       <ButtonCusTom
         fullWidth
         sx={{ mt: 5, mb: 2 }}
-        disabled={!!helperText}
+        disabled={!!errorMessage}
         padd={theme.spacing(2.25)}
-        backgroundColor={!!helperText ? theme.palette.gray[300] : undefined}
+        backgroundColor={!!errorMessage ? theme.palette.gray[300] : undefined}
       >
         {t("sell-with-moonpay")}
       </ButtonCusTom>
