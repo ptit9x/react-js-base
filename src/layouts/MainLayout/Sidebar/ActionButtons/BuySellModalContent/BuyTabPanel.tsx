@@ -1,21 +1,23 @@
 import InfoIcon from "@mui/icons-material/Info";
+import { useState } from "react";
 import { Trans } from "react-i18next";
 import { useTranslation } from "react-i18next";
-import { Box, MenuItem, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import {
-  cryptocurrencyUnits,
-  globalCurrencyUnits
-} from "src/constants/currencyUnits";
+import { Box, Stack, TextField, Typography } from "@mui/material";
 import { ButtonCusTom } from "src/assets/common.styled";
+import { tokenUnits, globalCurrencyUnits } from "src/constants/currencyUnits";
+import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
 import theme from "src/theme";
 
 import { LightTooltip as Tooltip } from "../../AccountCard/AccountCard.styled";
 
 const BuyTabPanel = () => {
   const { t } = useTranslation();
-  const [cryptoUnit, setCryptoUnit] = useState(cryptocurrencyUnits[0]);
-  const [globalUnit, setGlobalUnit] = useState(globalCurrencyUnits[0]);
+  const [currentToken, setCurrentToken] = useState<Option | null>(
+    tokenUnits[0]
+  );
+  const [globalUnit, setGlobalUnit] = useState<Option | null>(
+    globalCurrencyUnits[0]
+  );
   const [amountToSpend, setAmountToSpend] = useState(300);
 
   const buyFee = 3.25;
@@ -36,26 +38,35 @@ const BuyTabPanel = () => {
     </Trans>
   );
 
+  const handleTokenChange = (
+    _e: React.SyntheticEvent,
+    value: Option | null
+  ) => {
+    setCurrentToken(value);
+  };
+
+  const handleGlobalUnitChange = (
+    _e: React.SyntheticEvent,
+    value: Option | null
+  ) => {
+    setGlobalUnit(value);
+  };
+
   return (
     <>
-      <Typography fontSize={theme.spacing(2)} fontWeight={700}>
+      <Typography component="h1" fontSize={theme.spacing(2)} fontWeight={700}>
         {t("select-currency")}
       </Typography>
-      <TextField
-        id="select-currency"
+
+      <Autocomplete
         fullWidth
-        select
-        label="Currency"
-        value={cryptoUnit}
-        onChange={e => setCryptoUnit(e.target.value)}
-        sx={{ mt: 3 }}
-      >
-        {cryptocurrencyUnits.map(unit => (
-          <MenuItem key={unit} value={unit}>
-            {unit}
-          </MenuItem>
-        ))}
-      </TextField>
+        disableClearable
+        options={tokenUnits}
+        label={t("currency")}
+        inputValue={currentToken}
+        onChange={handleTokenChange}
+        sx={{ position: "relative", top: theme.spacing(2) }}
+      />
 
       <Typography fontSize={theme.spacing(2)} fontWeight={700} sx={{ mt: 5 }}>
         {t("how-much-want-to-spend")}
@@ -68,20 +79,15 @@ const BuyTabPanel = () => {
         onChange={e => setAmountToSpend(parseInt(e.target.value))}
         sx={{ width: "73%", mr: 1, mt: 3 }}
       />
-      <TextField
-        id="select-token-name"
-        select
+
+      <Autocomplete
         label=""
-        value={globalUnit}
-        onChange={e => setGlobalUnit(e.target.value)}
-        sx={{ width: "25%", mt: 3 }}
-      >
-        {globalCurrencyUnits.map(unit => (
-          <MenuItem key={unit} value={unit}>
-            {unit}
-          </MenuItem>
-        ))}
-      </TextField>
+        disableClearable
+        options={globalCurrencyUnits}
+        inputValue={globalUnit}
+        onChange={handleGlobalUnitChange}
+        sx={{ display: "inline-block", width: "25%", mt: 3 }}
+      />
 
       <Box mt={4} mb={5}>
         <Typography

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { Button, ButtonProps, Paper } from "@mui/material";
+import { Button, ButtonProps, Paper, PaperProps } from "@mui/material";
+import { BREAKPOINT } from "src/constants/styles";
 interface ButtonCusTomProps {
   padd?: string;
   backgroundColor?: string;
@@ -7,17 +8,22 @@ interface ButtonCusTomProps {
 }
 interface ItemPaperProps {
   padd?: string;
-  variant?: string;
+  hasNarrowPaddOnSM?: boolean;
 }
 
-export const ItemPaper = styled(Paper)<ItemPaperProps>`
+export const ItemPaper = styled(
+  ({ hasNarrowPaddOnSM, padd, ...props }: PaperProps & ItemPaperProps) => (
+    <Paper {...props} />
+  )
+)`
   padding: ${({ padd }) => padd ?? "2rem 3rem"};
   border-radius: 0.7rem;
-  //margin-bottom: ${({ theme }) => theme.spacing(3)};
   background-color: ${({ theme }) => theme.palette.common.white};
   color: ${({ theme }) => theme.palette.text.primary};
-  @media (max-width: 768px) {
-    margin-top: 0;
+
+  @media (max-width: ${BREAKPOINT.SM}px) {
+    padding: ${({ hasNarrowPaddOnSM, theme }) =>
+      hasNarrowPaddOnSM && theme.spacing(2)};
   }
 `;
 

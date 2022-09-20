@@ -18,8 +18,10 @@ const ContentLayout = ({
       <Box sx={{ gridArea: "main" }}>{main}</Box>
       <Box sx={{ gridArea: "network" }}>
         <Network />
+        {!disableSide && (
+          <Box sx={{ gridArea: "sidebar", mt: 2.25 }}>{sideRight}</Box>
+        )}
       </Box>
-      {!disableSide && <Box sx={{ gridArea: "sidebar" }}>{sideRight}</Box>}
     </ContentLayoutStyle>
   );
 };

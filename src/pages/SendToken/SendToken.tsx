@@ -3,19 +3,23 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import {
-  Autocomplete,
   Box,
-  Button,
   Grid,
+  Button,
   TextField,
-  Typography
+  Typography,
+  Autocomplete as MuiAutocomplete
 } from "@mui/material";
+import { useState } from "react";
 import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
+import { tokenUnits } from "src/constants/currencyUnits";
 import { walletAddress } from "src/constants";
 import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
+import MyTokenValue from "src/components/MyTokenValue/MyTokenValue";
 import SendAccordion from "src/pages/SendToken/SendAccordion";
+import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
 import theme from "src/theme";
 
 import { ButtonClear, ButtonDisable, FeeTypo } from "./SendToken.styled";
@@ -33,7 +37,7 @@ interface SendTokenPageProps {
 }
 
 const SendTokenPage = ({
-  token,
+  token = "ETH",
   amount,
   balance = 0,
   address,
@@ -44,9 +48,19 @@ const SendTokenPage = ({
   addData
 }: SendTokenPageProps) => {
   const { t } = useTranslation();
+  const [currentToken, setCurrentToken] = useState<Option | null>(
+    tokenUnits[0]
+  );
+
+  const handleTokenChange = (
+    _e: React.SyntheticEvent,
+    value: Option | null
+  ) => {
+    setCurrentToken(value);
+  };
 
   return (
-    <ItemPaper>
+    <ItemPaper hasNarrowPaddOnSM>
       <Typography
         component="h1"
         fontWeight="bold"
@@ -59,16 +73,18 @@ const SendTokenPage = ({
       </Typography>
 
       <Grid container spacing={2} mt={1.25}>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <Autocomplete
-            disablePortal
-            value={token}
-            options={["ETH"]}
+            fullWidth
+            disableClearable
+            options={[tokenUnits[0]]}
+            label={t("token")}
+            inputValue={currentToken}
+            onChange={handleTokenChange}
             sx={{ width: "100%", mb: 2.5 }}
-            renderInput={params => <TextField {...params} label={t("token")} />}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             type="number"
             value={amount}
@@ -78,51 +94,62 @@ const SendTokenPage = ({
         </Grid>
       </Grid>
 
-      <Box
-        p={2.5}
-        my={2}
-        borderRadius="10px"
-        bgcolor={theme.palette.blueGrey.A200}
-      >
-        <Box display="flex">
-          <ErrorOutlineIcon fontSize="small" />
-          <Box ml={0.5}>
-            <Typography fontWeight="bold" fontSize={theme.spacing(1.75)}>
-              {t("eth-balance-low")}
+      {balance === 0 && (
+        <Box p={2.5} my={2} borderRadius="10px" bgcolor="background.paper">
+          <Box display="flex">
+            <ErrorOutlineIcon fontSize="small" />
+            <Typography
+              fontWeight="bold"
+              fontSize={theme.spacing(1.75)}
+              sx={{ ml: 0.5 }}
+            >
+              {t("low-token-balance", { token })}
             </Typography>
           </Box>
+
+          <Grid container spacing={2} mt={0.5}>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="body2" color={theme.palette.blueGrey.A100}>
+                {t("low-balance-description", { token })}
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+            >
+              <Button
+                variant="text"
+                sx={{
+                  p: 0,
+                  textAlign: "left",
+                  fontWeight: "bold",
+                  textTransform: "none"
+                }}
+              >
+                {t("transfer-eth")}
+              </Button>
+              <Button
+                variant="text"
+                sx={{
+                  p: 0,
+                  mt: 1,
+                  minWidth: 0,
+                  fontWeight: "bold",
+                  textTransform: "none"
+                }}
+              >
+                {t("buy-eth")}
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
+      )}
 
-        <Grid container spacing={2} mt={0.5}>
-          <Grid item xs={6}>
-            <Typography variant="body2" color={theme.palette.blueGrey.A100}>
-              {t("describe-eth")}
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            xs={6}
-            display="flex"
-            flexDirection="column"
-            alignItems="flex-start"
-          >
-            <Button
-              variant="text"
-              sx={{ fontWeight: "bold", textTransform: "none" }}
-            >
-              {t("transfer-eth")}
-            </Button>
-            <Button
-              variant="text"
-              sx={{ fontWeight: "bold", textTransform: "none" }}
-            >
-              {t("buy-eth")}
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
-
-      <Autocomplete
+      <MuiAutocomplete
         disablePortal
         value={address}
         options={[walletAddress]}
@@ -141,8 +168,9 @@ const SendTokenPage = ({
           direction="row"
           alignItems="center"
           justifyContent="space-between"
+          flexWrap="wrap"
         >
-          <Stack direction="row" alignItems="center">
+          <Stack direction="row" alignItems="center" flexWrap="wrap">
             <Box
               p={0.75}
               mb={1.25}
@@ -178,11 +206,10 @@ const SendTokenPage = ({
             </Box>
             <FeeTypo sx={{ mb: 1.25 }}>{total} ETH</FeeTypo>
           </Stack>
-
           <Typography
             color={theme.palette.blueGrey.A100}
-            sx={{ mb: theme.spacing(1.25) }}
             fontSize={theme.spacing(1.75)}
+            sx={{ mb: 1.25 }}
           >
             {t("total")}: {total} ETH
           </Typography>
@@ -190,19 +217,17 @@ const SendTokenPage = ({
 
         <Stack
           direction="row"
+          flexWrap="wrap"
           alignItems="center"
           justifyContent="space-between"
         >
-          <Stack direction="row" alignItems="center">
+          <Stack direction="row" alignItems="center" flexWrap="wrap">
             <FeeTypo>{t("not-enough-eth")} </FeeTypo>
-            <Button variant="text" sx={{ textTransform: "none" }}>
+            <Button variant="text" sx={{ p: 0, textTransform: "none" }}>
               {t("buy-more-eth")}
             </Button>
           </Stack>
-          <Button
-            variant="text"
-            sx={{ textTransform: "none", marginRight: theme.spacing(-1) }}
-          >
+          <Button variant="text" sx={{ p: 0, textTransform: "none", mr: -1 }}>
             {t("fees-determined")}
           </Button>
         </Stack>
@@ -218,14 +243,11 @@ const SendTokenPage = ({
   );
 };
 
-const SendToken = () => {
-  return (
-    <DashBoardLayout
-      main={<SendTokenPage />}
-      sideRight={<ItemPaper></ItemPaper>}
-      disableSide
-    ></DashBoardLayout>
-  );
-};
+const SendToken = () => (
+  <DashBoardLayout
+    main={<SendTokenPage />}
+    sideRight={<MyTokenValue />}
+  ></DashBoardLayout>
+);
 
 export default SendToken;
