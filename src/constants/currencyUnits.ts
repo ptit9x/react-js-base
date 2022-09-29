@@ -37,21 +37,21 @@ export const tokenUnits = [
 ];
 
 export const globalCurrencyUnits = [
-  { label: "USD", icon: "https://www.myetherwallet.com/img/us.5947945e.svg" },
+  { symbol: "USD", image: "https://www.myetherwallet.com/img/us.5947945e.svg" },
   {
-    label: "AUD",
-    icon: "https://www.myetherwallet.com/img/au.857cd69f.svg"
+    symbol: "AUD",
+    image: "https://www.myetherwallet.com/img/au.857cd69f.svg"
   },
   {
-    label: "CAD",
-    icon: "https://www.myetherwallet.com/img/ca.4d433fc3.svg"
+    symbol: "CAD",
+    image: "https://www.myetherwallet.com/img/ca.4d433fc3.svg"
   },
   {
-    label: "EUR",
-    icon: "https://www.myetherwallet.com/img/european_union.871ae2e7.svg"
+    symbol: "EUR",
+    image: "https://www.myetherwallet.com/img/european_union.871ae2e7.svg"
   },
   {
-    label: "JYP",
-    icon: "https://www.myetherwallet.com/img/jp.be04fd89.svg"
+    symbol: "JYP",
+    image: "https://www.myetherwallet.com/img/jp.be04fd89.svg"
   }
 ];

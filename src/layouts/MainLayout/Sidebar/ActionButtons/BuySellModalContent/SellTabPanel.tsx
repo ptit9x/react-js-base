@@ -2,8 +2,8 @@ import { Box, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ButtonCusTom } from "src/assets/common.styled";
-import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
-import { tokenUnits } from "src/constants/currencyUnits";
+import Autocomplete from "src/components/Autocomplete/Autocomplete";
+import { useAppSelector } from "src/store";
 import theme from "src/theme";
 
 interface SellTabPanelProps {
@@ -12,8 +12,9 @@ interface SellTabPanelProps {
 
 const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
   const { t } = useTranslation();
-  const [currentToken, setCurrentToken] = useState<Option | null>(
-    tokenUnits[0]
+  const tokenMarkets: Token[] = useAppSelector(state => state.app.tokens);
+  const [currentToken, setCurrentToken] = useState<Token | null>(
+    tokenMarkets[1]
   );
   const [amountToSell, setAmountToSell] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,7 +28,7 @@ const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
       setErrorMessage(t("amount-required"));
     } else if (amountToSell > balance) {
       setErrorMessage(
-        t("you-do-not-have-enough-to-sell", { token: currentToken?.label })
+        t("you-do-not-have-enough-to-sell", { token: currentToken?.name })
       );
     } else {
       setErrorMessage("");
@@ -35,10 +36,7 @@ const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amountToSell, balance, currentToken]);
 
-  const handleTokenChange = (
-    _e: React.SyntheticEvent,
-    value: Option | null
-  ) => {
+  const handleTokenChange = (_e: React.SyntheticEvent, value: Token | null) => {
     setCurrentToken(value);
   };
 
@@ -47,7 +45,7 @@ const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
       <Autocomplete
         fullWidth
         disableClearable
-        options={tokenUnits}
+        options={tokenMarkets}
         label={t("currency")}
         inputValue={currentToken}
         onChange={handleTokenChange}
@@ -83,7 +81,7 @@ const SellTabPanel = ({ balance = 0 }: SellTabPanelProps) => {
         fontSize={theme.spacing(1.75)}
         color={theme.palette.blueGrey[600]}
       >
-        {t("after-submitting-sell-order", { token: currentToken?.label })}
+        {t("after-submitting-sell-order", { token: currentToken?.name })}
       </Typography>
 
       <ButtonCusTom

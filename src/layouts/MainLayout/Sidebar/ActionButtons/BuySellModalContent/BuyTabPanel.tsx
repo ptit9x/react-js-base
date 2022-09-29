@@ -2,20 +2,32 @@ import InfoIcon from "@mui/icons-material/Info";
 import { useState } from "react";
 import { Trans } from "react-i18next";
 import { useTranslation } from "react-i18next";
-import { Box, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Stack,
+  TextField,
+  Typography,
+  Autocomplete as MuiAutocomplete
+} from "@mui/material";
 import { ButtonCusTom } from "src/assets/common.styled";
-import { tokenUnits, globalCurrencyUnits } from "src/constants/currencyUnits";
-import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
+import { globalCurrencyUnits } from "src/constants/currencyUnits";
+import Autocomplete from "src/components/Autocomplete/Autocomplete";
+import { useAppSelector } from "src/store";
+import { LightTooltip as Tooltip } from "../../AccountCard/AccountCard.styled";
 import theme from "src/theme";
 
-import { LightTooltip as Tooltip } from "../../AccountCard/AccountCard.styled";
+interface GlobalCurrencyUnit {
+  symbol: string;
+  image: string;
+}
 
 const BuyTabPanel = () => {
   const { t } = useTranslation();
-  const [currentToken, setCurrentToken] = useState<Option | null>(
-    tokenUnits[0]
+  const tokenMarkets: Token[] = useAppSelector(state => state.app.tokens);
+  const [currentToken, setCurrentToken] = useState<Token | null>(
+    tokenMarkets[1]
   );
-  const [globalUnit, setGlobalUnit] = useState<Option | null>(
+  const [globalUnit, setGlobalUnit] = useState<GlobalCurrencyUnit>(
     globalCurrencyUnits[0]
   );
   const [amountToSpend, setAmountToSpend] = useState(300);
@@ -38,16 +50,13 @@ const BuyTabPanel = () => {
     </Trans>
   );
 
-  const handleTokenChange = (
-    _e: React.SyntheticEvent,
-    value: Option | null
-  ) => {
+  const handleTokenChange = (_e: React.SyntheticEvent, value: Token | null) => {
     setCurrentToken(value);
   };
 
   const handleGlobalUnitChange = (
     _e: React.SyntheticEvent,
-    value: Option | null
+    value: GlobalCurrencyUnit
   ) => {
     setGlobalUnit(value);
   };
@@ -61,7 +70,7 @@ const BuyTabPanel = () => {
       <Autocomplete
         fullWidth
         disableClearable
-        options={tokenUnits}
+        options={tokenMarkets}
         label={t("currency")}
         inputValue={currentToken}
         onChange={handleTokenChange}
@@ -80,13 +89,39 @@ const BuyTabPanel = () => {
         sx={{ width: "73%", mr: 1, mt: 3 }}
       />
 
-      <Autocomplete
-        label=""
+      <MuiAutocomplete
         disableClearable
         options={globalCurrencyUnits}
-        inputValue={globalUnit}
+        value={globalUnit}
         onChange={handleGlobalUnitChange}
+        getOptionLabel={option => option.symbol}
         sx={{ display: "inline-block", width: "25%", mt: 3 }}
+        renderOption={(props, option) => (
+          <Box
+            component="li"
+            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+            position="relative"
+            display="flex"
+            {...props}
+          >
+            <img loading="lazy" width="24" src={option.image} alt="icon" />
+            <Box>
+              <Typography fontSize={theme.spacing(1.75)}>
+                {option.symbol}
+              </Typography>
+            </Box>
+          </Box>
+        )}
+        renderInput={params => (
+          <TextField
+            {...params}
+            label=""
+            inputProps={{
+              ...params.inputProps,
+              autoComplete: ""
+            }}
+          />
+        )}
       />
 
       <Box mt={4} mb={5}>

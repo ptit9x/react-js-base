@@ -78,5 +78,8 @@
   "to": "To",
   "buy-more": "Buy more",
   "error-not-enough-balance": "Not enough balance to send!",
-  "buy-fee-explanation": "Includes {{buyFee}}% fee (${{minBuyFee}} min) <br /> <br /> ETH network fee (for transfers to your wallet) ~${{ethNetworkFee}} <br /> <br /> Daily limit: ${{dailyLimit}} <br /> Monthly limit: ${{monthlyLimit}}"
+  "buy-fee-explanation": "Includes {{buyFee}}% fee (${{minBuyFee}} min) <br /> <br /> ETH network fee (for transfers to your wallet) ~${{ethNetworkFee}} <br /> <br /> Daily limit: ${{dailyLimit}} <br /> Monthly limit: ${{monthlyLimit}}",
+  "token-not-supported": "Sell or Buy token not supported for now",
+  "something-went-wrong": "Something went wrong",
+  "network-or-swap-pair-not-supported": "Current network or Swap pair not supported for now"
 }
