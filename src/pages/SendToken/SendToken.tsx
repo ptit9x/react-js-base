@@ -8,21 +8,24 @@ import {
   Button,
   Grid,
   TextField,
-  Typography
+  Typography,
+  useTheme
 } from "@mui/material";
 import { Stack } from "@mui/system";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
 import { walletAddress } from "src/constants";
 import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
 import SendAccordion from "src/pages/SendToken/SendAccordion";
-import theme from "src/theme";
-
-import { ButtonClear, ButtonDisable, FeeTypo } from "./SendToken.styled";
+import { useAppSelector } from "../../store";
+import useWeb3 from "../../hooks/useWeb3";
+import { toBN, fromWei, toWei } from "web3-utils";
+import { ButtonClear, FeeTypo } from "./SendToken.styled";
+import hasValidDecimals from "src/helper/has-valid-decimals";
 
 interface SendTokenPageProps {
   token?: string;
-  amount?: number;
   balance?: number;
   address?: string;
   fee?: number;
@@ -34,16 +37,62 @@ interface SendTokenPageProps {
 
 const SendTokenPage = ({
   token,
-  amount,
   balance = 0,
-  address,
   fee = 0.47,
   time = 15,
   total = "0.000318",
   gasLimit,
   addData
 }: SendTokenPageProps) => {
+  const theme = useTheme();
   const { t } = useTranslation();
+  const web3 = useWeb3();
+  const [amount, setAmount] = useState("0");
+  const [totalCost, setTotalCost] = useState("0");
+  const [receiveAddress, setReceiveAddress] = useState("");
+  const wallet = useAppSelector(state => state.app.wallet);
+  const currentAddress = wallet.getAddress();
+
+  useEffect(() => {
+    try {
+      if (!hasValidDecimals(amount, 18)) setTotalCost("0");
+      const amountToWei = toWei(amount);
+      web3.getGasPrice().then(gasPrice => {
+        const totalCostInWei = toBN(21000 * gasPrice)
+          .add(toBN(amountToWei))
+          .toString();
+        setTotalCost(fromWei(totalCostInWei, "ether"));
+      });
+    } catch (error) {}
+  }, [amount, web3]);
+
+  async function send() {
+    // const cost = calculateTotalCost();
+    // console.log("cost: ", cost);
+    const nonce = await web3.getNonce(currentAddress);
+    const gasPrice = await web3.getGasPrice();
+    const value = toWei(amount);
+    const tx = {
+      from: currentAddress,
+      to: receiveAddress,
+      nonce,
+      gasPrice,
+      // gas: fromBase(21000 * gasPrice, 18, null),
+      value,
+      destinationValue: "0x",
+      data: "0x"
+    };
+    web3.sendTransaction(tx).then(console.log).catch(console.log);
+    return;
+  }
+
+  // function calculateTotalCost() {
+  //   console.log("amount: ", amount);
+  //   if (!hasValidDecimals(amount, 18)) return "0";
+  //   const amountToWei = toBase(amount, 18);
+  //   const totalCostInWei = toBN(21000).add(toBN(amountToWei)).toString();
+  //   setTotalCost(fromWei(totalCostInWei, "ether"));
+  // }
 
   return (
     <ItemPaper>
@@ -72,6 +121,9 @@ const SendTokenPage = ({
           <TextField
             type="number"
             value={amount}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setAmount(event.target.value);
+            }}
             sx={{ width: "100%", mb: 2.5 }}
             label={t("amount")}
           />
@@ -124,7 +176,15 @@ const SendTokenPage = ({
 
       <Autocomplete
         disablePortal
-        value={address}
+        freeSolo
+        value={receiveAddress}
+        onChange={(event: any, newValue: string | null) => {
+          setReceiveAddress(newValue || "");
+        }}
+        inputValue={receiveAddress}
+        onInputChange={(event, newInputValue) => {
+          setReceiveAddress(newInputValue);
+        }}
         options={[walletAddress]}
         sx={{ width: "100%", my: 3 }}
         renderInput={params => (
@@ -184,7 +244,7 @@ const SendTokenPage = ({
             sx={{ mb: theme.spacing(1.25) }}
             fontSize={theme.spacing(1.75)}
           >
-            {t("total")}: {total} ETH
+            {t("total")}: {totalCost} ETH
           </Typography>
         </Stack>
 
@@ -212,7 +272,9 @@ const SendTokenPage = ({
         <SendAccordion gasLimit={gasLimit} addData={addData} />
       </Box>
 
-      <ButtonDisable disabled>{t("next")}</ButtonDisable>
+      <Button variant="contained" onClick={send}>
+        {t("next")}
+      </Button>
       <ButtonClear>{t("clear-all")}</ButtonClear>
     </ItemPaper>
   );
