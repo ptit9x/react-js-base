@@ -10,8 +10,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { walletAddress } from "src/constants";
 import Modal from "src/components/Modal/Modal";
+import { useAppSelector } from "src/store";
 import theme from "src/theme";
 
 import {
@@ -24,11 +24,15 @@ import {
 import QRModalContent from "./QRModalContent";
 
 const AccountCard = () => {
-  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [shouldModalOpen, setModalOpen] = useState(false);
+
+  const { t } = useTranslation();
+  const wallet = useAppSelector(state => state.app.wallet);
+  const walletAddress = wallet.getAddress();
+  const balance = wallet.getBalance();
   const accountMenuOpen = Boolean(anchorEl);
 
-  const [shouldModalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
@@ -105,7 +109,7 @@ const AccountCard = () => {
           fontSize={theme.spacing(1.75)}
           color={theme.palette.common.white}
         >
-          0 ETH
+          {balance} ETH
         </Typography>
         <Box>
           <UtilButton onClick={handleModalOpen}>

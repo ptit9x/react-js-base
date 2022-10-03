@@ -17,7 +17,10 @@ const AccessWallet = () => {
     if (window.ethereum) {
       try {
         const address = await web3.getCurrentAddress();
-        store.dispatch(appSlice.actions.setWallet(new Wallet(address)));
+        const newWallet = new Wallet(address);
+        const balance = await web3.getBalance(address);
+        newWallet.setBalance(balance);
+        store.dispatch(appSlice.actions.setWallet(newWallet));
         navigate(PATH.DASHBOARD);
         // this.setWallet([wallet, window.ethereum]);
         // this.trackAccessWallet(WALLET_TYPES.WEB3_WALLET);
