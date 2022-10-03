@@ -72,5 +72,6 @@
   "you-do-not-have-enough-eth": "You do not have enough {{cryptoUnit}} to sell",
   "buy": "Buy",
   "sell": "Sell",
-  "buy-fee-explanation": "Includes {{buyFee}}% fee (${{minBuyFee}} min) <br /> <br /> ETH network fee (for transfers to your wallet) ~${{ethNetworkFee}} <br /> <br /> Daily limit: ${{dailyLimit}} <br /> Monthly limit: ${{monthlyLimit}}"
+  "buy-fee-explanation": "Includes {{buyFee}}% fee (${{minBuyFee}} min) <br /> <br /> ETH network fee (for transfers to your wallet) ~${{ethNetworkFee}} <br /> <br /> Daily limit: ${{dailyLimit}} <br /> Monthly limit: ${{monthlyLimit}}",
+  "error-not-enough-balance": "Not enough balance to send!"
 }

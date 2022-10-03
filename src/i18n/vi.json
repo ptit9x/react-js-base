@@ -5,5 +5,6 @@
   "english": "Tiếng Anh",
   "vietnam": "Tiếng Việt",
   "login-layout": "Giao diện đăng nhập",
-  "auth-layout": "Giao diện xác thực"
+  "auth-layout": "Giao diện xác thực",
+  "error-not-enough-balance": "Số dư không đủ để thực hiện giao dịch!"
 }

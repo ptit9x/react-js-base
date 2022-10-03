@@ -37,7 +37,6 @@ interface SendTokenPageProps {
 
 const SendTokenPage = ({
   token,
-  balance = 0,
   fee = 0.47,
   time = 15,
   total = "0.000318",
@@ -50,8 +49,15 @@ const SendTokenPage = ({
   const [amount, setAmount] = useState("0");
   const [totalCost, setTotalCost] = useState("0");
   const [receiveAddress, setReceiveAddress] = useState("");
+  const [amountError, setAmountError] = useState(false);
+
   const wallet = useAppSelector(state => state.app.wallet);
   const currentAddress = wallet.getAddress();
+  const balance = wallet.getBalance();
+
+  useEffect(() => {
+    if (+balance <= 0) setAmountError(true);
+  }, [balance]);
 
   useEffect(() => {
     try {
@@ -119,9 +125,16 @@ const SendTokenPage = ({
         </Grid>
         <Grid item xs={6}>
           <TextField
+            error={amountError}
             type="number"
             value={amount}
+            helperText={amountError ? t("error-not-enough-balance") : ""}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (+event.target.value >= +balance) {
+                setAmountError(true);
+              } else {
+                setAmountError(false);
+              }
               setAmount(event.target.value);
             }}
             sx={{ width: "100%", mb: 2.5 }}
