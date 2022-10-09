@@ -9,7 +9,11 @@ import { useAppDispatch } from "src/store";
 import theme from "src/theme";
 
 import { onOpenSidebar } from "../MainLayout.reducer";
-import { OpenSidebarButton } from "./Navbar.styled";
+import {
+  OpenSidebarButton,
+  BuyCryptoContainer,
+  NotiButton
+} from "./Navbar.styled";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -20,15 +24,23 @@ const Navbar = () => {
       sx={{ my: 2 }}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       align-center
+      position="relative"
     >
-      <Grid2 xs={12} md={8}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <OpenSidebarButton
-            onClick={() => dispatch(onOpenSidebar())}
-            BREAKPOINT={BREAKPOINT.XL}
-          >
-            <MenuIcon fill={theme.palette.blue[500]} width={40} height={40} />
-          </OpenSidebarButton>
+      <BuyCryptoContainer xs={12} md={8}>
+        <OpenSidebarButton
+          onClick={() => dispatch(onOpenSidebar())}
+          BREAKPOINT={BREAKPOINT.XL}
+        >
+          <MenuIcon fill={theme.palette.blue[500]} width={40} height={40} />
+        </OpenSidebarButton>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          flexWrap="wrap"
+          width="100%"
+          gap={1}
+        >
           <Box>
             <Typography fontWeight={theme.typography.fontWeightBold}>
               {t("you-can-now-buy-crypto")}
@@ -41,20 +53,18 @@ const Navbar = () => {
               {t("enjoy-low-fee")}
             </Typography>
           </Box>
-          <ButtonCusTom>{t("buy-crypto-now")}</ButtonCusTom>
+          <ButtonCusTom
+            padd={theme.spacing(2)}
+            sx={{ height: theme.spacing(5) }}
+          >
+            {t("buy-crypto-now")}
+          </ButtonCusTom>
         </Box>
-      </Grid2>
-      <Grid2
-        xs={12}
-        md={4}
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignSelf: "center"
-        }}
-      >
-        <NotificationsNoneIcon></NotificationsNoneIcon>
-      </Grid2>
+      </BuyCryptoContainer>
+
+      <NotiButton xs={12} md={4}>
+        <NotificationsNoneIcon />
+      </NotiButton>
     </Grid2>
   );
 };

@@ -3,26 +3,29 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import {
-  Autocomplete,
   Box,
-  Button,
   Grid,
+  Button,
   TextField,
   Typography,
-  useTheme
+  useTheme,
+  Autocomplete as MuiAutocomplete
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
+import { tokenUnits } from "src/constants/currencyUnits";
 import { walletAddress } from "src/constants";
 import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
+import MyTokenValue from "src/components/MyTokenValue/MyTokenValue";
 import SendAccordion from "src/pages/SendToken/SendAccordion";
 import { useAppSelector } from "../../store";
 import useWeb3 from "../../hooks/useWeb3";
 import { toBN, fromWei, toWei } from "web3-utils";
-import { ButtonClear, FeeTypo } from "./SendToken.styled";
 import hasValidDecimals from "src/helper/has-valid-decimals";
+import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
+import { ButtonClear, FeeTypo } from "./SendToken.styled";
 
 interface SendTokenPageProps {
   token?: string;
@@ -45,6 +48,16 @@ const SendTokenPage = ({
 }: SendTokenPageProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const [currentToken, setCurrentToken] = useState<Option | null>(
+    tokenUnits[0]
+  );
+
+  const handleTokenChange = (
+    _e: React.SyntheticEvent,
+    value: Option | null
+  ) => {
+    setCurrentToken(value);
+  };
   const web3 = useWeb3();
   const [amount, setAmount] = useState("0");
   const [totalCost, setTotalCost] = useState("0");
@@ -99,9 +112,8 @@ const SendTokenPage = ({
   //   const totalCostInWei = toBN(21000).add(toBN(amountToWei)).toString();
   //   setTotalCost(fromWei(totalCostInWei, "ether"));
   // }
-
   return (
-    <ItemPaper>
+    <ItemPaper hasNarrowPaddOnSM>
       <Typography
         component="h1"
         fontWeight="bold"
@@ -114,16 +126,18 @@ const SendTokenPage = ({
       </Typography>
 
       <Grid container spacing={2} mt={1.25}>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <Autocomplete
-            disablePortal
-            value={token}
-            options={["ETH"]}
+            fullWidth
+            disableClearable
+            options={[tokenUnits[0]]}
+            label={t("token")}
+            inputValue={currentToken}
+            onChange={handleTokenChange}
             sx={{ width: "100%", mb: 2.5 }}
-            renderInput={params => <TextField {...params} label={t("token")} />}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             error={amountError}
             type="number"
@@ -157,29 +171,40 @@ const SendTokenPage = ({
             </Typography>
           </Box>
         </Box>
-
         <Grid container spacing={2} mt={0.5}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Typography variant="body2" color={theme.palette.blueGrey.A100}>
-              {t("describe-eth")}
+              {t("low-balance-description", { token })}
             </Typography>
           </Grid>
           <Grid
             item
-            xs={6}
+            xs={12}
+            sm={6}
             display="flex"
             flexDirection="column"
             alignItems="flex-start"
           >
             <Button
               variant="text"
-              sx={{ fontWeight: "bold", textTransform: "none" }}
+              sx={{
+                p: 0,
+                textAlign: "left",
+                fontWeight: "bold",
+                textTransform: "none"
+              }}
             >
               {t("transfer-eth")}
             </Button>
             <Button
               variant="text"
-              sx={{ fontWeight: "bold", textTransform: "none" }}
+              sx={{
+                p: 0,
+                mt: 1,
+                minWidth: 0,
+                fontWeight: "bold",
+                textTransform: "none"
+              }}
             >
               {t("buy-eth")}
             </Button>
@@ -187,7 +212,7 @@ const SendTokenPage = ({
         </Grid>
       </Box>
 
-      <Autocomplete
+      <MuiAutocomplete
         disablePortal
         freeSolo
         value={receiveAddress}
@@ -214,8 +239,9 @@ const SendTokenPage = ({
           direction="row"
           alignItems="center"
           justifyContent="space-between"
+          flexWrap="wrap"
         >
-          <Stack direction="row" alignItems="center">
+          <Stack direction="row" alignItems="center" flexWrap="wrap">
             <Box
               p={0.75}
               mb={1.25}
@@ -251,11 +277,10 @@ const SendTokenPage = ({
             </Box>
             <FeeTypo sx={{ mb: 1.25 }}>{total} ETH</FeeTypo>
           </Stack>
-
           <Typography
             color={theme.palette.blueGrey.A100}
-            sx={{ mb: theme.spacing(1.25) }}
             fontSize={theme.spacing(1.75)}
+            sx={{ mb: 1.25 }}
           >
             {t("total")}: {totalCost} ETH
           </Typography>
@@ -263,19 +288,17 @@ const SendTokenPage = ({
 
         <Stack
           direction="row"
+          flexWrap="wrap"
           alignItems="center"
           justifyContent="space-between"
         >
-          <Stack direction="row" alignItems="center">
+          <Stack direction="row" alignItems="center" flexWrap="wrap">
             <FeeTypo>{t("not-enough-eth")} </FeeTypo>
-            <Button variant="text" sx={{ textTransform: "none" }}>
+            <Button variant="text" sx={{ p: 0, textTransform: "none" }}>
               {t("buy-more-eth")}
             </Button>
           </Stack>
-          <Button
-            variant="text"
-            sx={{ textTransform: "none", marginRight: theme.spacing(-1) }}
-          >
+          <Button variant="text" sx={{ p: 0, textTransform: "none", mr: -1 }}>
             {t("fees-determined")}
           </Button>
         </Stack>
@@ -293,14 +316,11 @@ const SendTokenPage = ({
   );
 };
 
-const SendToken = () => {
-  return (
-    <DashBoardLayout
-      main={<SendTokenPage />}
-      sideRight={<ItemPaper></ItemPaper>}
-      disableSide
-    ></DashBoardLayout>
-  );
-};
+const SendToken = () => (
+  <DashBoardLayout
+    main={<SendTokenPage />}
+    sideRight={<MyTokenValue />}
+  ></DashBoardLayout>
+);
 
 export default SendToken;
