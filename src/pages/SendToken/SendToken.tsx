@@ -83,7 +83,7 @@ const SendTokenPage = ({
       to: receiveAddress,
       nonce,
       gasPrice,
-      // gas: fromBase(21000 * gasPrice, 18, null),
+      gas: 21000,
       value,
       destinationValue: "0x",
       data: "0x"
