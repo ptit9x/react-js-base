@@ -23,9 +23,9 @@ import SendAccordion from "src/pages/SendToken/SendAccordion";
 import { useAppSelector } from "../../store";
 import useWeb3 from "../../hooks/useWeb3";
 import { toBN, fromWei, toWei } from "web3-utils";
-import hasValidDecimals from "src/helper/has-valid-decimals";
 import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
 import { ButtonClear, FeeTypo } from "./SendToken.styled";
+import { hasValidDecimals } from "../../utils";
 
 interface SendTokenPageProps {
   token?: string;
@@ -86,8 +86,6 @@ const SendTokenPage = ({
   }, [amount, web3]);
 
   async function send() {
-    // const cost = calculateTotalCost();
-    // console.log("cost: ", cost);
     const nonce = await web3.getNonce(currentAddress);
     const gasPrice = await web3.getGasPrice();
     const value = toWei(amount);
@@ -105,13 +103,6 @@ const SendTokenPage = ({
     return;
   }
 
-  // function calculateTotalCost() {
-  //   console.log("amount: ", amount);
-  //   if (!hasValidDecimals(amount, 18)) return "0";
-  //   const amountToWei = toBase(amount, 18);
-  //   const totalCostInWei = toBN(21000).add(toBN(amountToWei)).toString();
-  //   setTotalCost(fromWei(totalCostInWei, "ether"));
-  // }
   return (
     <ItemPaper hasNarrowPaddOnSM>
       <Typography
