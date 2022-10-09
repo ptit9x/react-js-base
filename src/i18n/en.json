@@ -77,5 +77,6 @@
   "from": "From",
   "to": "To",
   "buy-more": "Buy more",
+  "error-not-enough-balance": "Not enough balance to send!",
   "buy-fee-explanation": "Includes {{buyFee}}% fee (${{minBuyFee}} min) <br /> <br /> ETH network fee (for transfers to your wallet) ~${{ethNetworkFee}} <br /> <br /> Daily limit: ${{dailyLimit}} <br /> Monthly limit: ${{monthlyLimit}}"
 }

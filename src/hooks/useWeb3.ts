@@ -41,10 +41,57 @@ const useWeb3 = () => {
     return addresses[0];
   }, [isMetamaskInstalled]);
 
+  const sendTransaction = useCallback(
+    async (tx: any) => {
+      if (!isMetamaskInstalled) {
+        return;
+      }
+      const web3 = new Web3(window.ethereum);
+      return web3.eth.sendTransaction(tx);
+    },
+    [isMetamaskInstalled]
+  );
+
+  const getNonce = useCallback(
+    (address: string) => {
+      if (!isMetamaskInstalled) {
+        return;
+      }
+      const web3 = new Web3(window.ethereum);
+      return web3.eth.getTransactionCount(address);
+    },
+    [isMetamaskInstalled]
+  );
+
+  const getGasPrice = useCallback(() => {
+    if (!isMetamaskInstalled) {
+      return;
+    }
+    const web3 = new Web3(window.ethereum);
+    return web3.eth.getGasPrice();
+  }, [isMetamaskInstalled]);
+
+  // const estimateGas(data, from, to, value) {
+  //   if (this.address()) this.setFrom(this.address());
+  //   this._setTo();
+  //   this._setValue();
+  //   this._setGasPrice();
+  //   const web3 = getWeb3Instance()
+  //   return web3().eth.estimateGas({
+  //     data: data,
+  //     from: from,
+  //     to: to,
+  //     value: value
+  //   });
+  // }
+
   return {
+    getNonce,
     getBalance,
-    listenNetworkChange,
-    getCurrentAddress
+    getGasPrice,
+    sendTransaction,
+    getCurrentAddress,
+    listenNetworkChange
   };
 };
 
