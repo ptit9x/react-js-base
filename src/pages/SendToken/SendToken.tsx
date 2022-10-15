@@ -15,15 +15,13 @@ import { Stack } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ItemPaper } from "src/assets/common.styled";
-import { tokenUnits } from "src/constants/currencyUnits";
-import { walletAddress } from "src/constants";
 import DashBoardLayout from "src/layouts/ContentLayout/ContentLayout";
 import MyTokenValue from "src/components/MyTokenValue/MyTokenValue";
 import SendAccordion from "src/pages/SendToken/SendAccordion";
 import { useAppSelector } from "../../store";
 import useWeb3 from "../../hooks/useWeb3";
 import { toBN, fromWei, toWei } from "web3-utils";
-import Autocomplete, { Option } from "src/components/Autocomplete/Autocomplete";
+import Autocomplete from "src/components/Autocomplete/Autocomplete";
 import { ButtonClear, FeeTypo } from "./SendToken.styled";
 import { hasValidDecimals } from "../../utils";
 
@@ -48,14 +46,12 @@ const SendTokenPage = ({
 }: SendTokenPageProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const [currentToken, setCurrentToken] = useState<Option | null>(
-    tokenUnits[0]
+  const tokenMarkets: Token[] = useAppSelector(state => state.app.tokens);
+  const [currentToken, setCurrentToken] = useState<Token | null>(
+    tokenMarkets[1]
   );
 
-  const handleTokenChange = (
-    _e: React.SyntheticEvent,
-    value: Option | null
-  ) => {
+  const handleTokenChange = (_e: React.SyntheticEvent, value: Token | null) => {
     setCurrentToken(value);
   };
   const web3 = useWeb3();
@@ -76,7 +72,8 @@ const SendTokenPage = ({
     try {
       if (!hasValidDecimals(amount, 18)) setTotalCost("0");
       const amountToWei = toWei(amount);
-      web3.getGasPrice().then(gasPrice => {
+
+      web3.getGasPrice()?.then((gasPrice: any) => {
         const totalCostInWei = toBN(21000 * gasPrice)
           .add(toBN(amountToWei))
           .toString();
@@ -121,7 +118,7 @@ const SendTokenPage = ({
           <Autocomplete
             fullWidth
             disableClearable
-            options={[tokenUnits[0]]}
+            options={tokenMarkets}
             label={t("token")}
             inputValue={currentToken}
             onChange={handleTokenChange}
@@ -158,7 +155,7 @@ const SendTokenPage = ({
           <ErrorOutlineIcon fontSize="small" />
           <Box ml={0.5}>
             <Typography fontWeight="bold" fontSize={theme.spacing(1.75)}>
-              {t("eth-balance-low")}
+              {t("low-token-balance", { token: currentToken?.name })}
             </Typography>
           </Box>
         </Box>
@@ -207,14 +204,14 @@ const SendTokenPage = ({
         disablePortal
         freeSolo
         value={receiveAddress}
-        onChange={(event: any, newValue: string | null) => {
+        onChange={(_e: any, newValue: string | null) => {
           setReceiveAddress(newValue || "");
         }}
         inputValue={receiveAddress}
-        onInputChange={(event, newInputValue) => {
+        onInputChange={(_e, newInputValue) => {
           setReceiveAddress(newInputValue);
         }}
-        options={[walletAddress]}
+        options={[currentAddress]}
         sx={{ width: "100%", my: 3 }}
         renderInput={params => (
           <TextField {...params} label={t("to-address")} />

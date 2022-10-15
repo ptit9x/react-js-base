@@ -24,20 +24,21 @@ import {
 import QRModalContent from "./QRModalContent";
 
 const AccountCard = () => {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [shouldModalOpen, setModalOpen] = useState(false);
 
-  const { t } = useTranslation();
   const wallet = useAppSelector(state => state.app.wallet);
-  const walletAddress = wallet.getAddress();
   const balance = wallet.getBalance();
   const accountMenuOpen = Boolean(anchorEl);
 
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
-  const shortenAddress = (address: string) =>
-    `${address.slice(0, 6)}...${address.slice(address.length - 4)}`;
+  const shortenAddress = () =>
+    `${wallet.getAddress().slice(0, 6)}...${wallet
+      .getAddress()
+      .slice(wallet.getAddress().length - 4)}`;
 
   const handleOpenAccountMenu = (e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget);
@@ -60,13 +61,13 @@ const AccountCard = () => {
           {t("my-personal-account")}
         </AccountOptionsButton>
 
-        <Tooltip title={walletAddress} placement="top">
+        <Tooltip title={wallet.getAddress()} placement="top">
           <Typography
             fontSize={theme.spacing(1.25)}
             color={theme.palette.common.white}
             width="fit-content"
           >
-            {shortenAddress(walletAddress)}
+            {shortenAddress()}
           </Typography>
         </Tooltip>
       </Box>
@@ -109,7 +110,7 @@ const AccountCard = () => {
           fontSize={theme.spacing(1.75)}
           color={theme.palette.common.white}
         >
-          {balance} ETH
+          {parseFloat(balance).toFixed(4)} ETH
         </Typography>
         <Box>
           <UtilButton onClick={handleModalOpen}>

@@ -2,14 +2,17 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
-import AVATAR from "src/assets/images/avatar.png";
-import theme from "src/theme";
 
-import { walletAddress } from "src/constants";
 import { Wrapper as QRCodeWrapper } from "./AccountCard.styled";
+import AVATAR from "src/assets/images/avatar.png";
+import { useAppSelector } from "src/store";
+import Wallet from "src/common/Wallet";
+import theme from "src/theme";
 
 const QRModalContent = () => {
   const { t } = useTranslation();
+  const wallet: Wallet = useAppSelector(state => state.app.wallet);
+  const currentAddress = wallet.getAddress();
 
   return (
     <>
@@ -57,7 +60,7 @@ const QRModalContent = () => {
             height={theme.spacing(19)}
             padding={theme.spacing(1.5)}
           >
-            <QRCode value={walletAddress} size={128} />
+            <QRCode value={currentAddress} size={128} />
           </Box>
 
           <Box
@@ -76,7 +79,7 @@ const QRModalContent = () => {
                 letterSpacing: "1px"
               }}
             >
-              {walletAddress}
+              {currentAddress}
             </Typography>
             <Button
               size="small"
